@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        #box {
+            width: 1500px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        video {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #play {
+            width: 0;
+            height: 0;
+            border-top: 75px solid transparent;
+            border-bottom: 75px solid transparent;
+            border-left: 125px solid red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -125px;
+            margin-left: -50px;
+        }
+
+        #play:hover {
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            var vid = $('video').get(0);
+
+            $('#play').click(function () {
+                $('#play').fadeOut(1000);
+                vid.play();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="box">
+        <video controls>
+            <source src="images/mp4/tiktaktok.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div id="play"></div>
+</body>
+
+</html>

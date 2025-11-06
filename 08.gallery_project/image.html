@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>앨범 커버 갤러리</title>
+    <style>
+        /* 초기화 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #eee;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        body {
+            background-color: #A2A57B;
+        }
+
+        /* #tab 설정 */
+        #tab {
+            width: 800px;
+            margin: 75px auto;
+        }
+
+        /* .btn 설정 */
+        .btn li {
+            width: 160px;
+            height: 62px;
+            float: left;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .btn li a {
+            display: block;
+            border: 2px solid #ccc;
+            border-color: #ccc transparent #ccc #ccc;
+        }
+
+        .btn li:nth-of-type(5) a {
+            border-color: #ccc;
+        }
+
+        .btn li a.select {
+            font-weight: bold;
+            border-color: #ccc transparent transparent #ccc;
+        }
+
+        .btn li:nth-of-type(5) a.select {
+            font-weight: bold;
+            border-color: #ccc #ccc transparent #ccc;
+        }
+
+        /* .content 설정 */
+        .content {
+            clear: both;
+            border: 2px solid #ccc;
+            border-color: transparent #ccc #ccc #ccc;
+            height: 800px;
+            position: relative;
+        }
+
+        .content li {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -300px;
+            margin-left: -250px;
+            text-align: center;
+        }
+
+        .content li strong {
+            font-size: 18px;
+            display: block;
+            margin-top: 30px;
+            color: #eee;
+            line-height: 1.8;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $('.content li').hide();
+            $('.content #web1').show();
+
+            $('.btn a').click(function () {
+                // 버튼 태그 콘텐츠 전환
+                $('.btn a').removeClass('select');
+                $(this).addClass('select');
+                $('.content li').stop(true, true).fadeOut(1000);
+                $($(this).attr('href')).stop(true, true).fadeIn(1000);
+
+                // 배경색 전환
+                let colors = ['#A2A57B', '#7B90A6', '#C68642', '#3E6B4D', '#1E1E2E'];
+                let index = $(this).parent().index();
+                $('body').stop(true).animate({ backgroundColor: colors[index] }, 1000);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id="tab">
+        <!-- 상단 버튼 -->
+        <ul class="btn">
+            <li><a href="#web1" class="select">#1 track</a></li>
+            <li><a href="#web2">#2 track</a></li>
+            <li><a href="#web3">#3 track</a></li>
+            <li><a href="#web4">#4 track</a></li>
+            <li><a href="#web5">#5 track</a></li>
+        </ul>
+
+        <!-- 중단 앨범커버 -->
+        <ul class="content">
+            <li id="web1">
+                <img src="images/art1.jpg" width="500" alt="멸종 쏜애플 앨범 커버" />
+                <strong>멸종<br>쏜애플</strong>
+            </li>
+            <li id="web2">
+                <img src="images/art2.jpg" width="500" alt="Memories MAN WITH A MISSON 앨범 커버" />
+                <strong>Memories<br>MAN WITH A MISSON</strong>
+            </li>
+            <li id="web3">
+                <img src="images/art3.jpg" width="500" alt="Peanut butter sandwich 지소쿠리클럽 앨범 커버" />
+                <strong>Peanut butter sandwich<br>지소쿠리클럽</strong>
+            </li>
+            <li id="web4">
+                <img src="images/art4.jpg" width="500" alt="Antifreeze 검정치마 앨범 커버" />
+                <strong>Antifreeze<br>검정치마</strong>
+            </li>
+            <li id="web5">
+                <img src="images/art5.jpg" width="500" alt="I Robbed a bank 너드커넥션 앨범 커버" />
+                <strong>I Robbed a bank<br>너드커넥션</strong>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

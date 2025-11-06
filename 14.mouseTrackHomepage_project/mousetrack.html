@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nintendo Switch 2 | 닌텐도</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
+
+    <!-- head font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css" />
+
+    <!-- slide bar css -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css" />
+
+    <!-- loading bar css -->
+    <link rel="stylesheet" href="jquery-ui.css">
+
+    <style>
+        /* 초기 세팅 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        body {
+            background: rgba(230, 0, 18, 1);
+        }
+
+        /* header */
+        header {
+            height: 75px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #logo {
+            background-color: rgba(230, 0, 18, 1);
+            width: 14%;
+            height: 100%;
+        }
+
+        #logo a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #logo a p {
+            border: 3px solid white;
+            border-radius: 30px;
+            padding: 5px 40px;
+            color: white;
+            font-family: 'galmuri11', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        header ul {
+            width: 86%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header ul li {
+            border: 1px solid #ddd;
+            border-color: transparent #ddd #ddd transparent;
+            background: white;
+            width: 16.7%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header ul li:hover {
+            cursor: pointer;
+        }
+
+        header ul li:hover a {
+            color: rgba(230, 0, 18, 1);
+        }
+
+        header ul li a {
+            font-family: 'galmuri11', sans-serif;
+            font-weight: bold;
+        }
+
+        header ul li p {
+            position: absolute;
+            background: rgba(230, 0, 18, 1);
+            width: 0;
+            height: 4px;
+            top: 71px;
+            margin: 0 auto;
+            transition: all .3s ease;
+        }
+
+        header ul li:hover p {
+            width: 10%;
+        }
+
+        /* header, container 경계선 */
+        body>p {
+            background: white;
+            width: 100%;
+            height: 2px;
+        }
+
+        /* main */
+        .mainImage img {
+            width: 100%;
+        }
+
+        .mainText {
+            padding: 75px 0;
+        }
+
+        .mainText>div {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mainText1 {
+            text-align: center;
+        }
+
+        .mainText1 p {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .mainText1 p span {
+            font-size: 50px;
+        }
+
+        .mainText1 p:nth-of-type(2) {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 5px 0;
+            font-size: 30px;
+        }
+
+        .mainText2 {
+            position: relative;
+            border-radius: 20px;
+            margin-left: 100px;
+            transition: color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .mainText2 p {
+            position: relative;
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 40px 75px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .mainText2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .mainText2:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mainText2:hover p {
+            color: rgba(230, 0, 18, 1);
+            font-weight: bold;
+        }
+
+        .mainText2:hover {
+            cursor: pointer;
+        }
+
+        .subText {
+            padding: 0 0 75px;
+        }
+
+        .subText>div {
+            border: 3px solid white;
+            border-color: white transparent;
+            width: 80%;
+            margin: auto;
+            padding: 30px;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .subText>div p {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .subText>div div {
+            background-color: white;
+            width: 2px;
+            height: 75px;
+            margin: 0 50px;
+        }
+
+        .subText>div ul li {
+            color: white;
+        }
+
+        /* 로딩바 진행률 표시 */
+        .progress {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35%;
+            height: 300px;
+            color: rgb(255, 255, 255);
+            transition: all 1s ease;
+            z-index: 10;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            background-color: red;
+            width: 0%;
+            height: 5px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            margin-top: 4px;
+            text-align: center;
+            font-family: "Menlo", "Consolas", monospace;
+            font-size: 12px;
+        }
+
+        .progress-complete {
+            opacity: 0;
+            z-index: -100;
+        }
+
+        .mouseTrack {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mouseTrack p {
+            color: rgba(230, 0, 18, 1);
+        }
+
+        section {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        section img {
+            width: 100%;
+            height: auto;
+        }
+
+        .slideControls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #slidebar {
+            border: 1px solid #ccc;
+            flex: 1;
+            height: 10px;
+            margin: 0 10px;
+        }
+
+        /* 버튼 스타일 */
+        #togglePlay {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: rgba(230, 0, 18, 1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lastText {
+            width: 80%;
+            margin: auto;
+            padding: 100px 0 200px;
+        }
+
+        .lastText img {
+            width: 100%;
+        }
+
+        /* footer */
+        footer {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
+
+        .footer1 {
+            background-color: white;
+            width: 100%;
+            height: 300px;
+        }
+
+        .footer1>div {
+            width: 80%;
+            height: 100%;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .list {
+            width: 20%;
+            height: 100%;
+            padding: 100px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .list p {
+            background: rgba(230, 0, 18, 1);
+            width: 25px;
+            height: 3px;
+        }
+
+        .list h3 {
+            margin: 10px 0;
+        }
+
+        .list li {
+            text-align: center;
+        }
+
+        .list li:hover {
+            font-weight: bold;
+        }
+
+        .footer2 {
+            background-color: #f1f1f1;
+            width: 100%;
+            height: 120px;
+        }
+
+        .footer2>div {
+            width: 80%;
+            height: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .footerText {
+            width: 50%;
+            color: #333;
+            font-size: 13px;
+            padding: 0 10px;
+        }
+
+        .footerText1 span:nth-of-type(1) {
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .footerText1 span:nth-of-type(2),
+        .footerText1 span:nth-of-type(3),
+        .footerText1 span:nth-of-type(4) {
+            margin-right: 20px;
+        }
+
+        .footerText2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: end;
+        }
+
+        @media screen and (max-width: 1500px) {
+            .footerText {
+                font-size: 10px;
+            }
+        }
+
+        @media screen and (max-width: 1400px) {
+            #logo a p {
+                padding: 5px 30px;
+                font-size: 15px;
+            }
+
+            .subText {
+                padding: 0 0 50px;
+            }
+
+            .lastText {
+                padding: 50px 0;
+            }
+
+            .list h3 {
+                font-size: 15px;
+            }
+
+            .list ul li a {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1100px) {
+            #logo a p {
+                padding: 5px 20px;
+                font-size: 12px;
+            }
+
+            header ul li a {
+                font-size: 14px;
+            }
+
+            .mainText1 p {
+                font-size: 20px;
+            }
+
+            .mainText1 p span {
+                font-size: 30px;
+            }
+
+            .mainText1 p:nth-of-type(2) {
+                font-size: 20px;
+            }
+
+            .mainText2 p {
+                font-size: 20px;
+            }
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="imagesloaded.pkgd.min.js"></script>
+    <script>
+        $(function () {
+            let imgs = '';
+            for (let i = 0; i < 300; i++) {
+                imgs += '<img src="images/pic' + i + '.jpg">';
+            }
+            $('section').html(imgs);
+
+            $('section img').hide().eq(0).show();
+
+            // 마우스 무브
+            $('section').mousemove(function (e) {
+                let x = e.offsetX;
+                let win = $('section').width();
+                let percent = Math.floor((x / win) * 299);
+
+                $('.percent').text(percent);
+                $('section img').hide().eq(percent).show();
+                $('#slidebar').slider("value", percent);
+            });
+
+            // 슬라이더
+            $('#slidebar').slider({
+                min: 0,
+                max: 299,
+                value: 0,
+                orientation: 'horizontal',
+                animation: 'slow',
+                slide: function (event, ab) {
+                    let gage = ab.value;
+                    $('section img').hide().eq(gage).show();
+                    $('.percent').text(gage);
+                }
+            });
+
+            // 자동재생
+            let autoIndex = 0;
+            let fps = 30;
+            let interval = 2000 / fps;
+            let autoPlay = false;
+            let timer = null;
+
+            // 자동재생 함수
+            function startPlay() {
+                if (timer) return;
+                timer = setInterval(function () {
+                    autoIndex++;
+                    if (autoIndex > 299) autoIndex = 0;
+                    $('#slidebar').slider("value", autoIndex);
+                    $('section img').hide().eq(autoIndex).show();
+                    $('.percent').text(autoIndex);
+                }, interval);
+            }
+
+            // 정지 함수
+            function stopPlay() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            // 재생/일시정지 토글 버튼
+            $('#togglePlay').click(function () {
+                if (autoPlay) {
+                    stopPlay();
+                    $(this).text("▶");
+                } else {
+                    startPlay();
+                    $(this).text("⏸");
+                }
+                autoPlay = !autoPlay;
+            });
+
+            // 로딩바 함수 실행
+            imagesProgress();
+
+            function imagesProgress() {
+                var $container = $('#progress'),
+                    $progressBar = $container.find('.progress-bar'),
+                    $progressText = $container.find('.progress-text'),
+                    imgLoad = imagesLoaded('body'),
+                    imgTotal = imgLoad.images.length,
+                    imgLoaded = 0,
+                    current = 0,
+                    progressTimer = setInterval(updateProgress, 1000 / 60);
+                imgLoad.on('progress', function () {
+                    imgLoaded++;
+                });
+
+                function updateProgress() {
+                    var target = (imgLoaded / imgTotal) * 100;
+                    current += (target - current) * 0.1;
+                    $progressBar.css({ width: current + '%' });
+                    $progressText.text(Math.floor(current) + '%');
+                    if (current >= 100) {
+                        clearInterval(progressTimer);
+                        $container.addClass('progress-complete');
+                    }
+                    if (current > 99.9) {
+                        current = 100;
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="#">
+                <p>Nintendo</p>
+            </a>
+        </div>
+        <ul>
+            <li><a href="#">본체 및 amiibo</a>
+                <p></p>
+            </li>
+            <li><a href="#">소프트웨어</a>
+                <p></p>
+            </li>
+            <li><a href="#">News</a>
+                <p></p>
+            </li>
+            <li><a href="#">캐릭터</a>
+                <p></p>
+            </li>
+            <li><a href="#">고객지원</a>
+                <p></p>
+            </li>
+            <li><a href="#">스토어</a>
+                <p></p>
+            </li>
+        </ul>
+    </header>
+
+    <p></p>
+
+    <main>
+        <div id="container">
+            <div class="mainImage">
+                <img src="images/main.png" alt="스위치2 이미지" />
+            </div>
+
+            <div class="mainText">
+                <div>
+                    <div class="mainText1">
+                        <p>2025.<span>6.5 (목)</span> 발매</p>
+                        <p>상품 라인업</p>
+                    </div>
+                    <div class="mainText2">
+                        <p>「Nintendo Switch 2」본체 소개 영상</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subText">
+                <div>
+                    <p>본체 구입에 대하여</p>
+                    <div></div>
+                    <ul>
+                        <li><span>My Nintendo Store</span>에서 구입 가능합니다.</li>
+                        <li>전국의 게임 판매점 및 온라인 판매점에서의 구입은 각 판매점의 안내를 확인해 주세요.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mouseTrack">
+                <div class="progress" id="progress">
+                    <span class="progress-bar"></span>
+                    <span class="progress-text">0%</span>
+                </div>
+
+                <section>
+                    <img src="images/pic0.jpg" alt="영상 이미지" />
+                </section>
+
+                <div class="slideControls">
+                    <button id="togglePlay">▶</button>
+                    <p class="percent">0</p>
+                    <div id="slidebar"></div>
+                </div>
+            </div>
+
+
+            <div class="lastText">
+                <img src="images/main2.png" alt="텍스트 이미지" />
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer1">
+            <div>
+                <div class="list list1">
+                    <p></p>
+                    <h3>한국닌텐도</h3>
+                    <ul>
+                        <li><a href="#">회사 개요</a></li>
+                        <li><a href="#">찾아오시는 길</a></li>
+                    </ul>
+                </div>
+                <div class="list list2">
+                    <p></p>
+                    <h3>본체 / amiibo</h3>
+                    <ul>
+                        <li><a href="#">Nintendo Switch</a></li>
+                        <li><a href="#">amiibo</a></li>
+                    </ul>
+                </div>
+                <div class="list list3">
+                    <p></p>
+                    <h3>소프트웨어</h3>
+                    <ul>
+                        <li><a href="#">Nintendo Switch 소프트웨어</a></li>
+                        <li><a href="#">소프트웨어 발매 스케줄</a></li>
+                        <li><a href="#">스파트폰용 앱</a></li>
+                    </ul>
+                </div>
+                <div class="list list4">
+                    <p></p>
+                    <h3>고객지원</h3>
+                    <ul>
+                        <li><a href="#">Nintendo Switch</a></li>
+                        <li><a href="#">닌텐도 3DS</a></li>
+                        <li><a href="#">온라인 고객 상담</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer2">
+            <div>
+                <div class="footerText footerText1">
+                    <p>
+                        이용약관<span>개인정보처리방침</span><br>
+                        ⓒ 2006 Nintendo of Korea Co., Ltd. All Rights Reserved.<br>
+                        <span>상호명 : 한국닌텐도주식회사</span>
+                        <span>대표자명 : 미우라 타카히로</span>
+                        <span>사업자등록번호 : 120-87-03578</span>
+                    </p>
+                </div>
+                <div class="footerText footerText2">
+                    <p>고객지원 문의전화 : 1670-9900 (평일 오전 9시 30분~오후 5시 30분)</p><br>
+                    <p>※토/일/공휴일/회사 정기휴일 및 특별휴일 제외</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

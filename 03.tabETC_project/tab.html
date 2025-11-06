@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #container {
+            width: 400px;
+            height: 240px;
+            margin: 50px;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100px;
+            height: 40px;
+            float: left;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        #container div {
+            width: 400px;
+            height: 200px;
+            position: absolute;
+            top: 40px;
+            border: 1px solid #333;
+            border-radius: 0 0 7px 7px;
+            background-color: #ffee55;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 20px;
+        }
+
+        a.on {
+            border: 1px solid #333;
+            border-color: #333 #333 transparent #333;
+            border-radius: 5px 5px 0 0;
+            background-color: #ffee55;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $('#btn1').addClass('on');
+            $('#box2').hide();
+            $('#box3').hide();
+            $('#box4').hide();
+            $('#btn1').click(function () {
+                $('#box2').fadeOut();
+                $('#box3').fadeOut();
+                $('#box4').fadeOut();
+                $('#box1').fadeIn();
+                $('#btn2').removeClass('on');
+                $('#btn3').removeClass('on');
+                $('#btn4').removeClass('on');
+                $('#btn1').addClass('on');
+            });
+            $('#btn2').click(function () {
+                $('#box1').fadeOut();
+                $('#box3').fadeOut();
+                $('#box4').fadeOut();
+                $('#box2').fadeIn();
+                $('#btn1').removeClass('on');
+                $('#btn3').removeClass('on');
+                $('#btn4').removeClass('on');
+                $('#btn2').addClass('on');
+            });
+            $('#btn3').click(function () {
+                $('#box1').fadeOut();
+                $('#box2').fadeOut();
+                $('#box4').fadeOut();
+                $('#box3').fadeIn();
+                $('#btn1').removeClass('on');
+                $('#btn2').removeClass('on');
+                $('#btn4').removeClass('on');
+                $('#btn3').addClass('on');
+            });
+            $('#btn4').click(function () {
+                $('#box1').fadeOut();
+                $('#box2').fadeOut();
+                $('#box3').fadeOut();
+                $('#box4').fadeIn();
+                $('#btn1').removeClass('on');
+                $('#btn2').removeClass('on');
+                $('#btn3').removeClass('on');
+                $('#btn4').addClass('on');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <a href="#" id="btn1">첫번째 탭</a>
+        <a href="#" id="btn2">두번째 탭</a>
+        <a href="#" id="btn3">세번째 탭</a>
+        <a href="#" id="btn4">네번째 탭</a>
+        <div id="box1">
+            <p>첫번째 탭의 첫번째</p>
+            <p>첫번째 탭의 두번째</p>
+            <p>첫번째 탭의 세번째</p>
+            <p>첫번째 탭의 네번째</p>
+        </div>
+        <div id="box2">
+            <p>두번째 탭의 첫번째</p>
+            <p>두번째 탭의 두번째</p>
+            <p>두번째 탭의 세번째</p>
+            <p>두번째 탭의 네번째</p>
+        </div>
+        <div id="box3">
+            <p>세번째 탭의 첫번째</p>
+            <p>세번째 탭의 두번째</p>
+            <p>세번째 탭의 세번째</p>
+            <p>세번째 탭의 네번째</p>
+        </div>
+        <div id="box4">
+            <p>네번째 탭의 첫번째</p>
+            <p>네번째 탭의 두번째</p>
+            <p>네번째 탭의 세번째</p>
+            <p>네번째 탭의 네번째</p>
+        </div>
+    </div>
+</body>
+
+</html>

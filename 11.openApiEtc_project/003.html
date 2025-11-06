@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>003</title>
+    <link rel="stylesheet" href="src/jquery.fullPage.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        header {
+            width: 100%;
+            position: fixed;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            backdrop-filter: blur(3px);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+        }
+
+        h1 {
+            width: 20%;
+            text-align: center;
+        }
+
+        h1 img {
+            width: 75px;
+            height: 45px;
+            margin-top: 15px;
+        }
+
+
+        .main {
+            width: 80%;
+            height: 100%;
+            display: flex;
+        }
+
+        .main>li {
+            width: 20%;
+        }
+
+        .main>li>a {
+            display: block;
+            line-height: 80px;
+            text-align: center;
+        }
+
+        .main>li>a:hover {
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        .sub {
+            width: 100%;
+            background-color: rgba(0, 0, 0, .1);
+            display: none;
+        }
+
+        .sub li {
+            width: 100%;
+            text-align: center;
+            height: 50px;
+        }
+
+        .sub li a {
+            color: #aaa;
+            display: block;
+            height: 100%;
+            line-height: 50px;
+        }
+
+        .sub li a:hover {
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        #section1 {
+            background-image: url(src/bg.jpg);
+        }
+
+        #section2 {
+            background-image: url(src/bg2.jpg);
+        }
+
+        #section3 {
+            background-image: url(src/bg3.jpg);
+        }
+
+        #section4 {
+            background-image: url(src/bg4.jpg);
+        }
+
+        #section5 {
+            background-image: url(src/bg5.jpg);
+        }
+
+        .section {
+            background: center center / cover;
+            box-shadow: 5px 5px 100px rgb(0, 0, 0) inset;
+        }
+
+        .container1,
+        .container2,
+        .container3,
+        .container4,
+        .container5 {
+            width: 1300px;
+            height: 100%;
+            margin: auto;
+            /* border: 1px solid red; */
+            padding: 30px;
+        }
+
+        .text {
+            font-size: 75px;
+            font-weight: bold;
+            color: white;
+            margin-top: 200px;
+            text-shadow: 1px 1px 3px rgb(0, 0, 0);
+        }
+
+        @media screen and (max-width:1300px) {
+
+            .container1,
+            .container2,
+            .container3,
+            .container4,
+            .container5 {
+                width: 100%;
+                height: 100%;
+                /* border: 1px solid red; */
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="src/jquery.fullPage.js"></script>
+    <script>
+        $(function () {
+            $('#fullpage').fullpage({
+                'navigation': true,
+                'navigationPosition': 'right'
+            });
+
+            $('.main').hover(function () {
+                $('.sub').slideDown();
+            }, function () {
+                $('.sub').slideUp();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1><a href="#"><img src="src/logo2.png"></a></h1>
+            <ul class="main">
+                <li><a href="#">Test01</a>
+                    <ul class="sub">
+                        <li><a href="#">sub01</a></li>
+                        <li><a href="#">sub02</a></li>
+                        <li><a href="#">sub03</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Test02</a>
+                    <ul class="sub">
+                        <li><a href="#">sub01</a></li>
+                        <li><a href="#">sub02</a></li>
+                        <li><a href="#">sub03</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Test03</a>
+                    <ul class="sub">
+                        <li><a href="#">sub01</a></li>
+                        <li><a href="#">sub02</a></li>
+                        <li><a href="#">sub03</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Test04</a>
+                    <ul class="sub">
+                        <li><a href="#">sub01</a></li>
+                        <li><a href="#">sub02</a></li>
+                        <li><a href="#">sub03</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Test05</a>
+                    <ul class="sub">
+                        <li><a href="#">sub01</a></li>
+                        <li><a href="#">sub02</a></li>
+                        <li><a href="#">sub03</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="fullpage">
+        <div class="section" id="section1">
+            <div class="container1">
+                <div class="text">
+                    <p>Walt Disney <br> 01</p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section2">
+            <div class="container2">
+                <div class="text">
+                    <p>Walt Disney <br> 02</p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section3">
+            <div class="container3">
+                <div class="text">
+                    <p>Walt Disney <br> 03</p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section4">
+            <div class="container4">
+                <div class="text">
+                    <p>Walt Disney <br> 04</p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section5">
+            <div class="container5">
+                <div class="text">
+                    <p>Walt Disney <br> 05</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lethal_company</title>
+    <link rel="stylesheet" href="jquery.fullPage.css">
+    <style>
+        /* 초기 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        body {
+            background: #111;
+        }
+
+        /* aside 메뉴 */
+        aside {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        aside ul {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+        }
+
+        aside ul li {
+            margin: 20px 0;
+        }
+
+        aside ul li a {
+            color: #ccc;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.4);
+        }
+
+        aside ul li a:hover {
+            color: red;
+            font-weight: bold;
+        }
+
+        aside p {
+            position: absolute;
+            top: 135px;
+            right: 262.5px;
+            display: block;
+            width: 125px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            transform: rotate(90deg);
+            color: #ccc;
+            font-size: 20px;
+            text-align: center;
+            line-height: 45px;
+            cursor: pointer;
+        }
+
+        aside p:hover {
+            color: red;
+            font-weight: bold;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: -700px;
+            left: -25px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .logo img {
+            width: 25px;
+            margin: 0 15px;
+        }
+
+        .logo button:hover {
+            scale: 1.3;
+        }
+
+        /* section1 */
+        .container1 .text {
+            width: 80%;
+            margin: -50px auto 0;
+            text-align: center;
+        }
+
+        #section1 .text p,
+        #section1 .text span {
+            color: red;
+            font-size: 70px;
+            font-weight: bold;
+            animation: blink 2s infinite;
+        }
+
+        .marquee1,
+        .marquee2 {
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee1 {
+            top: 19%;
+        }
+
+        .marquee2 {
+            top: 0.1%;
+        }
+
+        .marquee1-inner,
+        .marquee2-inner {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee1 15s linear infinite;
+        }
+
+        .marquee2-inner {
+            animation: marquee2 15s linear infinite;
+        }
+
+        .marquee1 span,
+        .marquee2 span {
+            display: inline-block;
+            padding: 0 30px;
+            border: 1px solid red;
+            border-color: red transparent;
+            color: red;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* 공통 section */
+        .section {
+            background: center center / cover;
+            box-shadow: inset 0 0 250px rgb(0, 0, 0);
+        }
+
+        .container2,
+        .container3,
+        .container4,
+        .container5 {
+            width: 70%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .container2 .text,
+        .container3 .text,
+        .container4 .text,
+        .container5 .text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: all .5s ease-in-out;
+        }
+
+        .container2 .text p,
+        .container3 .text p,
+        .container4 .text p,
+        .container5 .text p {
+            margin: 200px 0 350px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgb(0, 0, 0);
+        }
+
+        .container2 .text span,
+        .container3 .text span,
+        .container4 .text span,
+        .container5 .text span {
+            color: white;
+            font-size: 20px;
+            text-shadow: 2px 2px 5px rgb(0, 0, 0);
+        }
+
+        .container2 .text.visible,
+        .container3 .text.visible,
+        .container4 .text.visible,
+        .container5 .text.visible {
+            opacity: 1;
+        }
+
+        /* #section별 배경 */
+        #section2 {
+            background-image: url(images/background1.jpg);
+        }
+
+        #section3 {
+            background-image: url(images/background2.jpg);
+        }
+
+        #section4 {
+            background-image: url(images/background3.jpg);
+        }
+
+        #section5 {
+            background-image: url(images/background4.jpg);
+        }
+
+        /* section1 화면 중단 blink 애니메이션 */
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* #section1 화면 상,하단 marquee 애니메이션 */
+        @keyframes marquee1 {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee2 {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script src="jquery.fullPage.js"></script>
+    <script>
+        $(function () {
+            var duration = 1000;
+            var aside = $('aside');
+            var btn = $('aside>p');
+
+            btn.click(function () {
+                aside.toggleClass('open');
+                if (aside.hasClass('open')) {
+                    aside.animate({ right: 0 }, duration, 'easeInOutQuad');
+                } else {
+                    aside.animate({ right: '-300px' }, duration, 'easeInOutQuad');
+                }
+            });
+
+            $('#fullpage').fullpage({
+                navigation: true,
+                navigationPosition: 'left',
+                afterLoad: function () {
+                    $(this).find('.text').addClass('visible');
+                },
+
+                onLeave: function () {
+                    $(this).find('.text').removeClass('visible');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <main>
+        <div id="sidemenu">
+            <aside>
+                <ul>
+                    <li><a href="#">NEW UPDATE</a></li>
+                    <li><a href="#">GAME GUIDE</a></li>
+                    <li><a href="#">OFFICAL PRODUCT</a></li>
+                    <div class="logo">
+                        <button><img src="images/logo1.png"></button>
+                        <button><img src="images/logo2.png"></button>
+                        <button><img src="images/logo3.png"></button>
+                    </div>
+                </ul>
+                <p>MENU</p>
+            </aside>
+        </div>
+
+        <div id="fullpage">
+            <div id="section1" class="section">
+                <div class="container1">
+                    <div class="text">
+                        <p>WARNING!!!<br><span>AUTHORIZED PERSONNEL ONLY</span></p>
+                    </div>
+                    <div class="marquee1">
+                        <div class="marquee1-inner">
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <!-- 위 아래를 반복 -->
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                            <span>WARNING!!</span>
+                        </div>
+                        <div class="marquee2">
+                            <div class="marquee2-inner">
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <!-- 위 아래를 반복 -->
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                                <span>WARNING!!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="section2" class="section">
+                <div class="container2">
+                    <div class="text">
+                        <p>Welcome to <br> lethal company!</p>
+                        <span>리썰 컴퍼니에 오신 여러분을 환영합니다</span>
+                    </div>
+                </div>
+            </div>
+            <div id="section3" class="section">
+                <div class="container3">
+                    <div class="text">
+                        <p>동료들과 협력하여 <br> 일일 할당치를 채우세요</p>
+                        <span>통신하고, 뭉쳐 다니며 서로를 의지하세요</span>
+                    </div>
+                </div>
+            </div>
+            <div id="section4" class="section">
+                <div class="container4">
+                    <div class="text">
+                        <p>근무 중 직면할 위험요소에 <br> 대비하세요</p>
+                        <span>관리자는 안전사항 미준수에 대해 어떠한 책임도 가지지 않습니다</span>
+                    </div>
+                </div>
+            </div>
+            <div id="section5" class="section">
+                <div class="container5">
+                    <div class="text">
+                        <p>괴물들에게서 벗어나 <br>임무를 완수하세요</p>
+                        <span>생명을 지킬 여러 수단들을 강구하세요</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>slider</title>
+    <link rel="stylesheet" href="slick/slick.css">
+    <link rel="stylesheet" href="slick/slick-theme.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="slick/slick.js"></script>
+    <script>
+
+        $(function () {
+
+            //console.clear();
+            //fade:true, ----fadeIn -Out으로 하고싶으면 이거 살려주면 됨, 기본값은 좌우슬라이드
+            //인디게이터 호버하면 텍스트 나타나게 html셋팅, 이거 수정하느라 고생함.
+            /*
+            인디게이터를 숫자로 표현하고 싶다면.. customPaging은 slick슬라이드에서 개발자가 응용할 수 있게 제공된 함수로 인디게이터를 자유롭게 연출토록함.
+            customPaging : function(slider, index) { 
+                var num = index + 1;
+                return '<span class="dot">'+ num +'</span>';
+                        }
+            */
+
+
+            $('.main-slider').slick({
+                dots: true,
+                customPaging: function (slider, i) {
+                    return '<button class="tab"><div class="s-indicator only-pc"><span class="inner-txt">' + $(slider.$slides[i]).attr('data-dot-title') + '</span></div><span class="s-line-fill"></span></button>';
+                },
+            });
+
+            // 마우스 더미에 올렸을 때 멈추도록
+            $('.slide-dummy, .slide-txt').mouseenter(function () {
+                $(this).closest('.slider-wrap').attr('data-slick-autoplay-status', 'N');
+            });
+
+            $('.slide-dummy').mouseleave(function () {
+                $(this).closest('.slider-wrap').attr('data-slick-autoplay-status', 'Y');
+            });
+
+            // 재생 및 정지 버튼 클릭
+            $('.s-autoplay-btn').click(function () {
+                var $sliderWrap = $(this).parent();
+
+                if ($sliderWrap.attr('data-slick-autoplay-status') == 'Y') {
+                    $sliderWrap.attr('data-slick-autoplay-status', 'N');
+                }
+                else if ($sliderWrap.attr('data-slick-autoplay-status') == 'N') {
+                    $sliderWrap.attr('data-slick-autoplay-status', 'Y');
+                }
+            })
+
+            // progressbar 다 차면 슬라이드 시키기
+            setInterval(function () {
+                $('.slider-wrap > .main-slider').each(function (index, node) {
+                    var $slider = $(node);
+
+                    if ($slider.parent().attr('data-slick-autoplay-status') !== 'N') {
+                        var width = $slider.find('.slick-dots .slick-active > button > .s-line-fill').css('width');
+                        var buttonWidth = $slider.find('.slick-dots .slick-active > button').css('width');
+
+                        //console.log(width);
+                        if (width == buttonWidth) {
+                            $slider.slick('slickNext');
+                        }
+                    }
+                });
+            }, 100);
+
+        });
+    </script>
+
+</head>
+
+
+<body>
+    <div class="slider-wrap con" data-slick-autoplay-status="N">
+        <div class="slider main-slider con">
+            <div class="slide-item slide-item-1" data-dot-title="언팩행사안내">
+                <div class="slide-con">
+                    <div class="slide-dummy"></div>
+                    <div class="slide-txt">
+                        <h2 class="txt-tt">Galaxy UNPACKED</h2>
+                        <p class="txt-desc">2020년 2월 12일 4AM 삼성닷컴에서 생방송을 만나보세요</p>
+                        <div class="txt-btn">
+                            <a href="#" class="txt-btn-2">사전판매 알림신청</a>
+                        </div>
+                    </div>
+                    <picture class="img-box">
+                        <img src="images/01.jpg" alt="">
+                    </picture>
+                </div>
+            </div>
+            <div class="slide-item slide-item-2" data-dot-title="AI런칭">
+                <div class="slide-con">
+                    <div class="slide-dummy"></div>
+                    <div class="slide-txt">
+                        <h2 class="txt-tt">삼성 그랑데 <sup>AI</sup> 런칭</h2>
+                        <p class="txt-desc">세탁에서 건조까지 하나되어 맞추다</p>
+                        <div class="txt-btn">
+                            <a href="#" class="txt-btn-1">더 알아보기</a>
+                            <a href="#" class="txt-btn-2">구매 혜택 보기</a>
+                        </div>
+                    </div>
+                    <picture class="img-box">
+                        <img src="images/02.jpg" alt="">
+                    </picture>
+                </div>
+            </div>
+            <div class="slide-item slide-item-3" data-dot-title="Gallexy book">
+                <div class="slide-con">
+                    <div class="slide-dummy"></div>
+                    <div id="videoBox">
+
+                        <a href="#" class="txt-video">더 알아보기</a>
+
+                    </div>
+                    <picture class="img-box box2">
+                        <video muted autoplay preload loop>
+                            <source src="Images/up.mp4" type="video/mp4">
+                        </video>
+                    </picture>
+                </div>
+            </div>
+            <div class="slide-item slide-item-4" data-dot-title="BESPOKE">
+                <div class="slide-con">
+                    <div class="slide-dummy"></div>
+                    <div class="slide-txt">
+                        <h2 class="txt-tt">BESPOKE 냉장고</h2>
+                        <p class="txt-desc">가구를 맞추듯 가전을 맞추다</p>
+                        <div class="txt-btn">
+                            <a href="#" class="txt-btn-1">더 알아보기</a>
+                            <a href="#" class="txt-btn-2">구매 혜택 보기</a>
+                        </div>
+                    </div>
+                    <picture class="img-box">
+                        <img src="images/04.jpg" alt="">
+                    </picture>
+                </div>
+            </div>
+            <div class="slide-item slide-item-5" data-dot-title="lifeStyle TV">
+                <div class="slide-con">
+                    <div class="slide-dummy"></div>
+                    <div class="slide-txt">
+                        <h2 class="txt-tt">New Lifestyle TV</h2>
+                        <p class="txt-desc">새로운 라이프 스타일을 스크린에 담다</p>
+                        <div class="txt-btn">
+                            <a href="#" class="txt-btn-1">더 알아보기</a>
+                            <a href="#" class="txt-btn-2">구매 혜택 보기</a>
+                        </div>
+                    </div>
+                    <picture class="img-box">
+                        <img src="images/05.jpg" alt="">
+                    </picture>
+                </div>
+            </div>
+        </div>
+        <button class="s-autoplay-btn"></button>
+    </div>
+
+    <h1>잠꾸러기 없는나라 우리나라 좋은나라</h1>
+
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>네임카드 (파일 업로드 포함)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      display: flex;
+      gap: 120px;
+    }
+
+    .inputbox {
+      width: 300px;
+    }
+
+    .inputbox label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .inputbox input,
+    .inputbox textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .card {
+      width: 300px;
+      min-height: 220px;
+      padding: 20px;
+      border-radius: 10px;
+      color: #fff;
+      transition: all 0.3s ease;
+      text-align: center;
+      border: 1px solid #ccc;
+      background: #999;
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 2px solid #fff;
+    }
+
+    .card h2 {
+      margin: 0 0 10px 0;
+    }
+
+    .card p {
+      margin: 5px 0;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      // 텍스트 입력 처리
+      $('#name, #color, #intro').on('input', function () {
+        $('#cardName').text($('#name').val() || '이름');
+        $('#cardIntro').text($('#intro').val() || '자기소개가 여기에 나옵니다.');
+
+        let color = $('#color').val();
+        $('#card').css('background-color', color || '#666');
+      });
+
+      // 이미지 파일 업로드 처리
+      $('#photo').on('change', function (event) {
+        var file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $('#cardPhoto').attr('src', e.target.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert("이미지 파일을 선택해주세요.");
+        }
+      });
+
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <!-- 입력 영역 -->
+  <div class="inputbox">
+    <label for="name">이름</label>
+    <input type="text" id="name">
+
+    <label for="color">좋아하는 색상</label>
+    <input type="text" id="color" placeholder="예: skyblue, #ff9900 등">
+
+    <label for="intro">자기소개</label>
+    <textarea id="intro" rows="4"></textarea>
+
+    <label for="photo">사진 업로드</label>
+    <input type="file" id="photo" accept="image/*">
+  </div>
+
+  <!-- 출력 네임카드 -->
+  <div class="card" id="card">
+    <img src="http://placehold.co/100X100" id="cardPhoto" alt="프로필 사진">
+    <h2 id="cardName">이름</h2>
+    <p id="cardIntro">자기소개가 여기에 나옵니다.</p>
+  </div>
+
+</body>
+
+</html>

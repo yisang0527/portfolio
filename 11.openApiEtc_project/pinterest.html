@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest</title>
+    <link rel="stylesheet" href="colorbox.css">
+    <style>
+        /* 초기 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        /* 메인 태그 시작 */
+        /* sideBar css */
+        #sideBar {
+            border: 1px solid #ccc;
+            border-color: transparent #ccc transparent transparent;
+            width: 70px;
+            height: 100vh;
+            padding: 10px;
+            position: fixed;
+            text-align: center;
+        }
+
+        /* container 구역 시작 */
+        #container {
+            /* border: 1px solid red; */
+            width: 100%;
+            padding-top: 10px;
+            padding-left: 90px;
+        }
+
+        /* searchBox css */
+        .searchBox {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 99%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .searchBox input[type="search"] {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        /* masonry css */
+        #masonry {
+            margin-top: 10px;
+        }
+
+        .item {
+            border-radius: 10px;
+            background-color: whitesmoke;
+            margin-bottom: 10px;
+            float: left;
+        }
+
+        /* .item의 mask */
+        .item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .item:hover::before {
+            opacity: 1;
+        }
+
+        .item img {
+            border-radius: 10px;
+        }
+
+        .normal {
+            width: 250px;
+            height: 250px;
+        }
+
+        .big {
+            width: 250px;
+            height: 375px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="masonry.pkgd.min.js"></script>
+    <script src="jquery.colorbox.js"></script>
+    <script>
+        $(function () {
+            $('#masonry').masonry({
+                itemSelector: '.item',
+                columnWidth: 260,
+                isAnimated: true,
+            });
+
+            $(function () {
+                $('.image').colorbox();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <main>
+        <!-- sideBar html *화면 왼쪽 -->
+        <div id="sideBar">
+            <img src="images/sidebar.png">
+        </div>
+
+        <!-- container html *화면 전체-->
+        <div id="container">
+            <form class="searchBox" action="/search">
+                <input type="search" placeholder="검색">
+            </form>
+
+            <!-- masonry, colorbox html -->
+            <div id="masonry">
+                <a class="image item normal" href="images/normal_masonry1.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry1.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry2.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry2.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry1.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry1.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry3.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry3.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry4.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry4.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry5.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry5.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry2.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry2.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry6.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry6.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry6.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry6.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry7.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry7.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry8.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry8.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry9.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry9.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry9.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry9.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry11.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry11.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry10.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry10.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry11.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry11.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry12.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry12.jpg" width="100%">
+                </a>
+                <a class="image item normal" href="images/normal_masonry12.jpg" rel="colorbox" title="앨범 커버">
+                    <img src="images/normal_masonry12.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry3.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry3.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry4.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry4.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry5.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry5.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry7.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry7.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry8.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry8.jpg" width="100%">
+                </a>
+                <a class="image item big" href="images/big_masonry10.jpg" rel="colorbox" title="영화 포스터">
+                    <img src="images/big_masonry10.jpg" width="100%">
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

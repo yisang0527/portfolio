@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        #container {
+            border: 1px solid #333;
+            width: 1500px;
+            height: 900px;
+            margin: 20px auto;
+        }
+
+        header {
+            border: 1px solid #333;
+            background-color: white;
+            height: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        main {
+            border: 1px solid #333;
+            background-color: white;
+            height: calc(100% - 240px);
+            margin: 10px;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        footer {
+            border: 1px solid #333;
+            background-color: white;
+            height: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .aside {
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            text-align: center;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* transition: all .75s ease; */
+        }
+
+        .aside img {
+            margin-top: 20px;
+        }
+
+        .tag {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 40px;
+            height: 120px;
+            top: 150px;
+            left: 250px;
+        }
+
+        .tag p {
+            color: white;
+            writing-mode: vertical-rl;
+            padding: 10px;
+            font-size: 20px;
+            line-height: 25px;
+        }
+
+        .tag p::before {
+            content: "◀";
+            font-size: 15px;
+            display: inline-block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .aside.move p::before {
+            content: "▶";
+        }
+
+        /* .aside.move {
+            transform: translateX(-250px);
+        } */
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $('.tag').click(function () {
+                if ($('.aside').hasClass('move')) {
+                    // 열기 애니메이션
+                    $('.aside').removeClass('move').animate({ left: 0 }, { duration: 1000, easing: 'easeOutBounce' });
+                    $('.tag p').text('close');
+                } else {
+                    // 닫기 애니메이션
+                    $('.aside').addClass('move').animate({ left: '-250px' }, { duration: 1000, easing: 'easeOutBounce' });
+                    $('.tag p').text('open');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <header>Creative jQuery</header>
+        <main>
+            <h2>This place main page</h2>
+        </main>
+        <footer><small>copyright all right reserved. 2025&copy;</small></footer>
+    </div>
+
+    <div class="aside">
+        <img src="images/01_aside.png" alt="aside_image">
+        <img src="images/02_aside.png" alt="aside_image">
+        <img src="images/03_aside.png" alt="aside_image">
+        <div class="tag">
+            <p>close</p>
+        </div>
+    </div>
+</body>
+
+</html>

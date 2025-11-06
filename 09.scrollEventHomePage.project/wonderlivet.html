@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WONDERLIVET 2025</title>
+    <style>
+        /* 기본 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        body {
+            background: black;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        main {
+            /* border: 1px solid red; */
+            position: relative;
+        }
+
+        main>div {
+            position: absolute;
+        }
+
+        /* 메뉴 이동 버튼 설정 */
+        nav {
+            /* border: 1px solid red; */
+            position: fixed;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        nav li {
+            margin: 15px 0;
+        }
+
+        nav li a {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        nav li a.select {
+            background: #9b9bff;
+        }
+
+        /* 메인 메뉴 컨텐츠 설정 */
+        #main {
+            /* border: 1px solid red; */
+            width: 1200px;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+
+        .logo {
+            /* border: 1px solid red; */
+            width: 300px;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mainText {
+            /* border: 1px solid red; */
+            width: 450px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mainText p {
+            color: #ccccff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo2 {
+            /* border: 1px solid red; */
+            width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo3 {
+            /* border: 1px solid red; */
+            width: 500px;
+            margin: auto;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #btn {
+            /* border: 1px solid red; */
+            width: 500px;
+            margin: auto;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #btn div {
+            /* border: 1px solid red; */
+            background: linear-gradient(to right, #ccccff 0%, #c3d5f0 50%, #ccccff 100%);
+            border-radius: 3px 15px;
+            width: 120px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #btn div a {
+            /* border: 1px solid red; */
+            display: block;
+            font-weight: bold;
+        }
+
+        #btn div:hover {
+            animation: hover .3s ease-in forwards;
+        }
+
+        /* About 컨텐츠 설정 */
+        #about {
+            /* border: 1px solid red; */
+            width: 1200px;
+            top: 1100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .aboutStart {
+            /* border: 1px solid red; */
+            width: 300px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        .aboutStart.show {
+            opacity: 1;
+        }
+
+        .aboutStart p {
+            color: #ccccff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .aboutText {
+            /* border: 1px solid red; */
+            width: 750px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        .aboutText.show {
+            opacity: 1;
+        }
+
+        .aboutText2 {
+            /* border: 1px solid red; */
+            width: 800px;
+            margin: auto;
+            margin-top: 15px;
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        .aboutText2.show {
+            opacity: 1;
+        }
+
+        .aboutText2 p {
+            color: #777;
+        }
+
+        #aboutContents {
+            /* border: 1px solid red; */
+            width: 1125px;
+            height: 525px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        #aboutContents div {
+            /* border: 1px solid red; */
+            width: 550px;
+            height: 250px;
+            background: #111;
+            border-radius: 20px;
+            padding: 45px;
+        }
+
+        .abountContents1,
+        .abountContents2,
+        .abountContents3,
+        .abountContents4 {
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        .abountContents1.show,
+        .abountContents2.show,
+        .abountContents3.show,
+        .abountContents4.show {
+            opacity: 1;
+        }
+
+        #aboutContents div h2 {
+            color: #ccccff;
+            margin-bottom: 20px;
+        }
+
+        #aboutContents div strong {
+            color: #ccc;
+        }
+
+        /* lineup 컨텐츠 설정 */
+        #lineup {
+            /* border: 1px solid red; */
+            width: 1200px;
+            top: 2200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #lineupText {
+            /* border: 1px solid red; */
+            margin: 50px auto;
+            height: 300px;
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        #lineupText.show {
+            opacity: 1;
+        }
+
+        .livet {
+            /* border: 1px solid red; */
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translate(900px, 10px);
+        }
+
+        .moveLivet {
+            animation: updown 2s ease-in-out infinite;
+        }
+
+        .lineupBanner {
+            background: linear-gradient(to right, #ccccff 0%, #c3d5f0 50%, #ccccff 100%);
+            border-radius: 3px 15px;
+            width: 120px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translate(100px, -150px);
+        }
+
+        .lineupBanner p {
+            font-weight: bold;
+        }
+
+        .subText {
+            /* border: 1px solid red; */
+            width: 500px;
+            display: flex;
+            align-items: center;
+            transform: translate(90px, -140px);
+        }
+
+        .listBtn {
+            /* border: 1px solid red; */
+            width: 900px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .listBtn img:hover {
+            animation: hover .3s ease-in forwards;
+        }
+
+        #lineupList>p {
+            /* border: 1px solid red; */
+            background-color: #c3d5f0;
+            width: 100%;
+            height: 3px;
+            margin: 30px auto;
+            transform: translateX(-1680px);
+            transition: all 1s ease-in-out;
+        }
+
+        #lineupList>p.move {
+            transform: translateX(0px);
+        }
+
+        .artist>div {
+            /* border: 1px solid red; */
+            width: 1100px;
+            margin: 30px auto;
+        }
+
+        /* map 콘텐츠 설정 */
+        #map {
+            /* border: 1px solid red; */
+            width: 1200px;
+            top: 5200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #mapText {
+            /* border: 1px solid red; */
+            width: 300px;
+            margin: auto;
+            margin-top: 200px;
+            display: flex;
+            flex-direction: column;
+            ;
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        #mapText.show {
+            opacity: 1;
+        }
+
+        .mapBanner {
+            background: linear-gradient(to right, #ccccff 0%, #c3d5f0 50%, #ccccff 100%);
+            border-radius: 3px 15px;
+            width: 120px;
+            height: 50px;
+            margin: auto;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .mapInfo {
+            /* border: 1px solid red; */
+            width: 1100px;
+            margin: auto;
+            margin-top: 40px;
+            opacity: 0;
+            transition: all .8s ease-in;
+        }
+
+        .mapInfo.show {
+            opacity: 1;
+        }
+
+        #adress {
+            /* border: 1px solid red; */
+            margin-top: 150px;
+        }
+
+        #adress>div {
+            /* border: 1px solid red; */
+            margin: 55px 0;
+        }
+
+        .adress1_1,
+        .adress2_1,
+        .adress3_1,
+        .adress4_1 {
+            background: linear-gradient(to right, #ccccff 0%, #c3d5f0 50%, #ccccff 100%);
+            border-radius: 3px 15px;
+            width: 125px;
+            height: 45px;
+            text-align: center;
+            line-height: 45px;
+            margin: auto;
+        }
+
+        .adress1_1 p,
+        .adress2_1 p,
+        .adress3_1 p,
+        .adress4_1 p {
+            font-weight: bold;
+        }
+
+        .adress1_2,
+        .adress2_2,
+        .adress3_2,
+        .adress4_2 {
+            background: #222;
+            border-radius: 10px;
+            height: 45px;
+            text-align: center;
+            line-height: 45px;
+            margin: 10px auto;
+        }
+
+        .adress1_2 p,
+        .adress2_2 p,
+        .adress3_2 p,
+        .adress4_2 p {
+            color: #ccc;
+        }
+
+        .adress1_2 {
+            width: 250px;
+        }
+
+        .adress2_2 {
+            width: 200px;
+        }
+
+        .adress3_2:nth-of-type(2) {
+            width: 250px;
+        }
+
+        .adress3_2 {
+            width: 700px;
+        }
+
+        .adress4_2:nth-of-type(2) {
+            width: 300px;
+        }
+
+        .adress4_2 {
+            width: 800px;
+        }
+
+        /* footer 설정 */
+        #footer {
+            /* border: 1px solid red; */
+            width: 500px;
+            top: 7000px;
+            left: 50%;
+            transform: translate(-50%);
+            display: flex;
+            justify-content: center;
+            padding: 50px 0 50px 0;
+        }
+
+        /* #main fadeIn 애니메이션 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes hover {
+            0% {
+                transform: scale();
+
+            }
+
+            100% {
+                transform: scale(120%);
+            }
+        }
+
+        /* lineup 컨텐츠 애니메이션 */
+        @keyframes updown {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(50px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 1440px) {
+
+            /* main 콘텐츠 설정 */
+            #main {
+                width: 1000px;
+            }
+
+            .logo2 {
+                width: 950px;
+            }
+
+            /* about 컨텐츠 설정 */
+            #about {
+                width: 1000px;
+            }
+
+            #aboutContents {
+                width: 925px;
+                height: 450px;
+            }
+
+            #aboutContents div {
+                width: 450px;
+                height: 200px;
+            }
+
+            /* lineup 컨텐츠 설정 */
+            #lineup {
+                width: 1000px;
+            }
+
+            .livet {
+                transform: translate(750px, 10px);
+            }
+
+            .lineupBanner {
+                transform: translate(60px, -150px);
+            }
+
+            .subText {
+                transform: translate(60px, -140px);
+            }
+
+            .artist>div {
+                width: 950px;
+            }
+
+            /* map 컨텐츠 설정 */
+            #map {
+                width: 1000px;
+            }
+
+            .mapInfo {
+                width: 900px;
+            }
+
+            /* footer 컨텐츠 설정 */
+        }
+
+        @media screen and (max-width: 1200px) {
+
+            /* main 콘텐츠 설정 */
+            #main {
+                width: 750px;
+            }
+
+            .logo2 {
+                width: 700px;
+            }
+
+            /* about 컨텐츠 설정 */
+            #about {
+                width: 750px;
+            }
+
+            .aboutText2 {
+                width: 700px;
+                font-size: 15px;
+            }
+
+            #aboutContents {
+                width: 700px;
+                height: 350px;
+            }
+
+            #aboutContents div {
+                width: 325px;
+                height: 150px;
+                padding: 20px;
+            }
+
+            #aboutContents div h2 {
+                margin-bottom: 10px;
+                font-size: 18px;
+            }
+
+            #aboutContents div strong {
+                font-size: 15px;
+            }
+
+            /* lineup 컨텐츠 설정 */
+            #lineup {
+                width: 750px;
+            }
+
+            .livet {
+                width: 150px;
+                height: 150px;
+                transform: translate(550px, 50px);
+            }
+
+            .lineupBanner {
+                transform: translate(50px, -100px);
+            }
+
+            .subText {
+                width: 400px;
+                transform: translate(50px, -85px);
+            }
+
+            .listBtn {
+                width: 749px;
+            }
+
+            .artist>div {
+                width: 749px;
+            }
+
+            /* map 컨텐츠 설정 */
+            #map {
+                width: 750px;
+            }
+
+            .mapInfo {
+                width: 700px;
+            }
+
+            .adress3_2,
+            .adress4_2 {
+                width: 650px;
+                font-size: 13px;
+            }
+
+            /* footer 컨텐츠 설정 */
+            #footer {
+                top: 6900px;
+            }
+        }
+
+        @media screen and (max-width: 920px) {
+
+            /* main 콘텐츠 설정 */
+            #main {
+                width: 600px;
+            }
+
+            .logo2 {
+                width: 550px;
+            }
+
+            /* about 컨텐츠 설정 */
+            #about {
+                width: 600px;
+            }
+
+            .aboutText {
+                width: 550px;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+            }
+
+            .aboutText2 {
+                width: 550px;
+                font-size: 11px;
+            }
+
+            #aboutContents {
+                width: 600px;
+                height: 450px;
+            }
+
+            #aboutContents div {
+                width: 550px;
+                height: 100px;
+                margin: auto;
+                padding: 10px;
+            }
+
+            #aboutContents div h2 {
+                margin-bottom: 5px;
+                margin-left: 20px;
+                font-size: 17px;
+            }
+
+            #aboutContents div strong {
+                font-size: 14px;
+                margin-left: 20px;
+            }
+
+            /* lineup 컨텐츠 설정 */
+            #lineup {
+                width: 600px;
+            }
+
+            .livet {
+                width: 100px;
+                height: 100px;
+                transform: translate(450px, 80px);
+            }
+
+            .lineupBanner {
+                transform: translate(30px, -50px);
+            }
+
+            .subText {
+                width: 350px;
+                transform: translate(30px, -30px);
+            }
+
+            .listBtn {
+                width: 599px;
+            }
+
+            .listBtn img {
+                width: 130px;
+            }
+
+            .artist>div {
+                width: 599px;
+            }
+
+            /* map 컨텐츠 설정 */
+            #map {
+                width: 600px;
+            }
+
+            .mapInfo {
+                width: 600px;
+            }
+
+            .adress3_2,
+            .adress4_2 {
+                width: 550px;
+                font-size: 12px;
+            }
+
+            /* footer 컨텐츠 설정 */
+            #footer {
+                top: 6800px;
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            //페이지 초기화 이벤트
+            $('html, body').animate({ scrollTop: 0 }, 'swing');
+
+            // 메뉴 이동 버튼 이벤트
+            $('.menu1').click(function () {
+                $('html,body').stop(true, true).animate({ scrollTop: 0 }, 1000, 'swing');
+                $('nav a').removeClass('select');
+                $(this).addClass('select');
+            });
+            $('.menu2').click(function () {
+                $('html,body').stop(true, true).animate({ scrollTop: 1100 }, 1000, 'swing');
+                $('nav a').removeClass('select');
+                $(this).addClass('select');
+            });
+            $('.menu3').click(function () {
+                $('html,body').stop(true, true).animate({ scrollTop: 2200 }, 1000, 'swing');
+                $('nav a').removeClass('select');
+                $(this).addClass('select');
+            });
+            $('.menu4').click(function () {
+                $('html,body').stop(true, true).animate({ scrollTop: 5200 }, 1000, 'swing');
+                $('nav a').removeClass('select');
+                $(this).addClass('select');
+            });
+
+            // scroll 이벤트
+            $(window).scroll(function () {
+                if ($(window).scrollTop() <= 1099) {
+                    $('nav a').removeClass('select');
+                    $('.menu1').addClass('select');
+                } else if ($(window).scrollTop() <= 2199) {
+                    $('nav a').removeClass('select');
+                    $('.menu2').addClass('select');
+                } else if ($(window).scrollTop() <= 5199) {
+                    $('nav a').removeClass('select');
+                    $('.menu3').addClass('select');
+                } else if ($(window).scrollTop() >= 5200) {
+                    $('nav a').removeClass('select');
+                    $('.menu4').addClass('select');
+                }
+
+                // About 콘텐츠 이벤트
+                if ($(window).scrollTop() <= 200) {
+                    $('.aboutStart').removeClass('show');
+                    $('.aboutText').removeClass('show');
+                    $('.aboutText2').removeClass('show');
+                }
+                if ($(window).scrollTop() >= 250) {
+                    $('.aboutStart').addClass('show');
+                }
+                if ($(window).scrollTop() >= 350) {
+                    $('.aboutText').addClass('show');
+                }
+                if ($(window).scrollTop() >= 450) {
+                    $('.aboutText2').addClass('show');
+                }
+
+                if ($(window).scrollTop() <= 450) {
+                    $('.abountContents1').removeClass('show');
+                    $('.abountContents2').removeClass('show');
+                    $('.abountContents3').removeClass('show');
+                    $('.abountContents4').removeClass('show');
+                }
+                if ($(window).scrollTop() >= 700) {
+                    $('.abountContents1').addClass('show');
+                    $('.abountContents2').addClass('show');
+                }
+                if ($(window).scrollTop() >= 900) {
+                    $('.abountContents3').addClass('show');
+                    $('.abountContents4').addClass('show');
+                }
+
+                // Lineup 콘텐츠 이벤트
+                if ($(window).scrollTop() <= 1450) {
+                    $('#lineupText').removeClass('show');
+                }
+                if ($(window).scrollTop() >= 1500) {
+                    $('#lineupText').addClass('show');
+                }
+
+                if ($(window).scrollTop() <= 1700) {
+                    $('#lineupList > p').removeClass('move');
+                }
+                if ($(window).scrollTop() >= 1750) {
+                    $('#lineupList > p').addClass('move');
+                }
+
+                // map 콘텐츠 이벤트
+                if ($(window).scrollTop() <= 4500) {
+                    $('#mapText').removeClass('show');
+                    $('.mapInfo').removeClass('show');
+                }
+                if ($(window).scrollTop() >= 4600) {
+                    $('#mapText').addClass('show');
+                }
+                if ($(window).scrollTop() >= 4700) {
+                    $('.mapInfo').addClass('show');
+                }
+            });
+
+            // 강제 스크롤 이벤트
+            $(window).trigger('scroll');
+        });
+    </script>
+</head>
+
+<body>
+    <main>
+        <!-- 메뉴 이동 버튼 -->
+        <nav>
+            <ul>
+                <li><a class="menu1" href="#main"></a></li>
+                <li><a class="menu2" href="#about"></a></li>
+                <li><a class="menu3" href="#lineup"></a></li>
+                <li><a class="menu4" href="#map"></a></li>
+            </ul>
+        </nav>
+
+        <!-- 메인 메뉴 컨텐츠 -->
+        <div id="main">
+            <div class="logo">
+                <img src="images/logo.png" alt="logo">
+            </div>
+
+            <div class="mainText">
+                <p>국내 최대 규모 J-POP & Iconic Artist 페스티벌</p>
+            </div>
+
+            <div class="logo2">
+                <img src="images/logo2.png" alt="logo2" width="100%">
+            </div>
+
+            <div class="logo3">
+                <img src="images/logo3.png" alt="logo3">
+            </div>
+
+            <div id="btn">
+                <div class="btn1"><a href="#">멜론티켓</a></div>
+                <div class="btn2"><a href="#">티켓링크</a></div>
+                <div class="btn3"><a href="#">GLOBAL</a></div>
+            </div>
+        </div>
+
+        <!-- About 컨텐츠 -->
+        <div id="about">
+            <div class="aboutStart">
+                <p>About</p>
+            </div>
+
+            <div class="aboutText">
+                <img src="images/text.png" alt="text" width="100%">
+            </div>
+
+            <div class="aboutText2">
+                <p>라이브 엔터테인먼트 브랜드 리벳(LIVET)과 'THE GLOW'등의 페스티벌을 제작한 원더로크(WANDERLOCH)가</p>
+                <P>지금까지 볼 수 없었던 최대 규모의 J-POP & Iconic Artist를 중심으로 한 페스티벌을 개최합니다</P>
+            </div>
+
+            <div id="aboutContents">
+                <div class="abountContents1">
+                    <h2>일시 & 장소</h2>
+                    <strong>2025년 11월 14일 - 16일, 3일 간</strong><br>
+                    <strong>KINTEX HALL 7, 8, 10 에서</strong>
+                </div>
+                <div class="abountContents2">
+                    <h2>티켓 예매</h2>
+                    <strong>멜론티켓, 티켓링크</strong><br>
+                    <strong>Melon Ticket Global</strong>
+                </div>
+                <div class="abountContents3">
+                    <h2>출연 아티스트</h2>
+                    <strong>총 28팀의</strong><br>
+                    <strong>1차 라인업 공개</strong>
+                </div>
+                <div class="abountContents4">
+                    <h2>and more</h2>
+                    <strong>추후 공개 될</strong><br>
+                    <strong>더욱 다양한 정보들</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- lineup 컨텐츠 -->
+        <div id="lineup">
+            <div id="lineupText">
+                <div class="livet">
+                    <img class="moveLivet" src="images/livet.png" alt="livet" width="100%">
+                </div>
+
+                <div class="lineupBanner">
+                    <p>LINE UP</p>
+                </div>
+
+                <div class="subText">
+                    <img src="images/subtext.png" alt="subtext" width="100%">
+                </div>
+            </div>
+
+            <div id="lineupList">
+                <div class="listBtn">
+                    <a href="#"><img src="images/btn1.png" alt="btn1" width="170" height="100"></a>
+                    <a href="#artistFri"><img src="images/btn2.png" alt="btn2" width="170" height="100"></a>
+                    <a href="#artistSat"><img src="images/btn3.png" alt="btn3" width="170" height="100"></a>
+                    <a href="#artistSun"><img src="images/btn4.png" alt="btn4" width="170" height="100"></a>
+                </div>
+
+                <p></p>
+
+                <div class="artist">
+                    <div id="artistFri">
+                        <img src="images/fri.png" alt="fri" width="100%">
+                    </div>
+                    <div id="artistSat">
+                        <img src="images/sat.png" alt="sat" width="100%">
+                    </div>
+                    <div id="artistSun">
+                        <img src="images/sun.png" alt="sun" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- map 컨텐츠 -->
+        <div id="map">
+            <div id="mapText">
+                <div class="mapBanner">
+                    <p>MAP</p>
+                </div>
+
+                <div class="come">
+                    <img src="images/come.png" alt="come">
+                </div>
+            </div>
+
+            <div class="mapInfo">
+                <img src="images/mapinfo.png" alt="map" width="100%">
+            </div>
+
+            <div id="adress">
+                <div class="adress1">
+                    <div class="adress1_1">
+                        <p>GTX-A</p>
+                    </div>
+
+                    <div class="adress1_2">
+                        <p>킨텍스역(GTX-A) 4번, 5번 출구</p>
+                    </div>
+                </div>
+
+                <div class="adress2">
+                    <div class="adress2_1">
+                        <p>SUBWAY</p>
+                    </div>
+
+                    <div class="adress2_2">
+                        <p>3호선 대화역 2번 출구</p>
+                    </div>
+                </div>
+
+                <div class="adress3">
+                    <div class="adress3_1">
+                        <p>BUS</p>
+                    </div>
+
+                    <div class="adress3_2">
+                        <p>킨텍스 정류장 하차: 8190, 8407</p>
+                    </div>
+                    <div class="adress3_2">
+                        <p>힐스테이트 일산, 현대모터스튜디오고양 정류장 하차: 55, 89, 1100, 6701, M7646, M7731</p>
+                    </div>
+                </div>
+
+                <div class="adress4">
+                    <div class="adress4_1">
+                        <p>CAR</p>
+                    </div>
+
+                    <div class="adress4_2">
+                        <p>네비게이션 입력: 킨텍스 제 2전시장</p>
+                    </div>
+                    <div class="adress4_2">
+                        <p>주차요금: 승용, 승합차, 소형 화물(2.5톤 미만) 기본 30분: 1,500원 / 추가 10분당: 500원 / 일일요금: 12,000원</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div id="footer">
+            <img src="images/footer.png" alt="footer">
+        </div>
+    </main>
+</body>
+
+</html>

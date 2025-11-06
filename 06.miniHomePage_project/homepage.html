@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈페이지 | KR.UFC.com</title>
+
+    <style>
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 헤더 & 로고 */
+        header {
+            position: relative;
+        }
+
+        .logo {
+            width: 200px;
+            height: 75px;
+            margin: 15px auto;
+            text-align: center;
+            line-height: 65px;
+        }
+
+        .logo a {
+            font-size: 60px;
+            font-weight: bold;
+            font-style: italic;
+            color: black;
+            -webkit-text-stroke: 1.5px white;
+        }
+
+        /* 햄버거 메뉴 버튼 */
+        #trigger {
+            display: none;
+        }
+
+        .ham {
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .line {
+            display: block;
+            width: 30px;
+            height: 4px;
+            background-color: white;
+            margin: 4px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .on .line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .on .line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .on .line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* 메뉴 바 */
+        .menu {
+            width: 1400px;
+            margin: auto;
+        }
+
+        .menu>li {
+            float: left;
+            width: 200px;
+            background-color: white;
+        }
+
+        .menu>li>a {
+            display: block;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .menu>li>a.hover {
+            color: red;
+        }
+
+        .menu>li>p {
+            width: 0;
+            height: 2px;
+            margin: auto;
+            background-color: red;
+            transition: all 0.3s ease;
+        }
+
+        /* 서브메뉴 */
+        .submenu {
+            display: none;
+        }
+
+        .submenu li {
+            background-color: #aaa;
+        }
+
+        .submenu a {
+            display: block;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            color: #222;
+        }
+
+        .submenu a.hover {
+            font-weight: bold;
+        }
+
+        /* 메인 콘텐츠 */
+        .maincon {
+            position: absolute;
+            top: 157px;
+            width: 100%;
+            vertical-align: top;
+            z-index: -1;
+        }
+
+        /* 반응형 스타일 */
+        @media screen and (max-width: 1400px) {
+            .menu {
+                width: 1050px;
+            }
+
+            .menu>li {
+                width: 150px;
+            }
+
+            .menu>li>a {
+                width: 150px;
+            }
+        }
+
+        @media screen and (max-width: 1050px) {
+            .menu {
+                width: 700px;
+                font-size: 13px;
+            }
+
+            .menu>li {
+                width: 100px;
+            }
+
+            .menu>li>a {
+                width: 100px;
+            }
+
+            .maincon {
+                top: 157px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                width: 100%;
+            }
+
+            .menu>li {
+                width: 14.28%;
+            }
+
+            .logo {
+                position: absolute;
+                top: -10px;
+                left: 50%;
+                margin-left: -100px;
+            }
+
+            .logo a {
+                font-size: 30px;
+            }
+
+            .maincon {
+                top: 75px;
+            }
+
+            #trigger {
+                display: block;
+                width: 100%;
+                position: relative;
+            }
+        }
+    </style>
+
+    <!-- jQuery & jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+
+    <script>
+        $(function () {
+            var trigger = $('#trigger');
+
+            /* 메인 메뉴 hover 효과 */
+            $('.menu > li').hover(
+                function () {
+                    $(this).children('a').addClass('hover');
+                    $(this).children('p').stop().animate({ width: '100%' }, 100);
+                    $('.submenu').stop().slideDown(500);
+                },
+                function () {
+                    $(this).children('a').removeClass('hover');
+                    $(this).children('p').stop().animate({ width: '0' }, 100);
+                    $('.submenu').stop().slideUp(500);
+                }
+            );
+
+            /* 서브메뉴 hover 효과 */
+            $('.submenu > li').hover(
+                function () { $(this).children('a').addClass('hover'); },
+                function () { $(this).children('a').removeClass('hover'); }
+            );
+
+            /* 모바일 햄버거 메뉴 클릭 */
+            trigger.click(function () {
+                $('.menu').slideToggle();
+                $('.ham').toggleClass('on');
+            });
+
+            /* 창 크기 변경 시 메뉴 초기화 */
+            $(window).resize(function () {
+                if ($(window).width() > 768 && $('.menu').is(':hidden')) {
+                    $('.menu').removeAttr('style');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">UFC</a>
+        </div>
+
+        <!-- 햄버거 메뉴 버튼 -->
+        <a href="#" id="trigger">
+            <div class="ham">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </a>
+
+        <!-- 메뉴 -->
+        <ul class="menu">
+            <li>
+                <a href="#">이벤트</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#">티켓</a></li>
+                    <li><a href="#">이후 일정</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">랭킹</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#">체급별 랭킹</a></li>
+                    <li><a href="#">역대 랭킹</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">파이터</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#">전체 명단</a></li>
+                    <li><a href="#">기록 현황</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">뉴스</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">커넥트</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#">FIND GYM</a></li>
+                    <li><a href="#">뉴스 레터</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">UFC 파이트 패스</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#">UFC 파이트 패스</a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">스토어</a>
+                <p></p>
+                <ul class="submenu">
+                    <li><a href="#">개인 굿즈</a></li>
+                    <li><a href="#">UFC 콜렉션</a></li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="maincon">
+            <picture>
+                <source media="(max-width: 768px)" srcset="images/maincon2.png">
+                <img src="images/maincon.png" width="100%">
+            </picture>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basketball</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgb(146, 1, 1) url(images/logo.png);
+            background-size: 175px;
+        }
+
+
+        #control {
+            width: 1000px;
+            height: 700px;
+            margin: 100px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .player {
+            width: 100px;
+            height: 250px;
+            position: relative;
+            margin: auto;
+            margin-top: 180px;
+        }
+
+        .player img {
+            height: 250px;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .controls p {
+            border: 5px solid black;
+            width: 125px;
+            height: 125px;
+            line-height: 120px;
+            cursor: pointer;
+            background-color: white;
+            font-weight: bold;
+        }
+
+        #background {
+            width: 1500px;
+            height: 700px;
+            margin: auto;
+            text-align: center;
+            position: absolute;
+            top: 0px;
+            left: 11%;
+            z-index: -1;
+        }
+
+        .bg {
+            height: 700px;
+            border: 5px solid black;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src=”https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js”></script>
+    <script>
+        $(function () {
+            var x = 0;
+            var y = 0;
+            var interval;
+
+            $('.dunk').mousedown(function () {
+                $('.player img').attr('src', 'images/dunk.png');
+            }).mouseup(function () {
+                $('.player img').attr('src', 'images/image.png');
+            });
+
+            $('.left').mousedown(function () {
+                interval = setInterval(function () { left(); }, 50);
+            }).mouseup(function () {
+                clearInterval(interval);
+            });
+            $('.right').mousedown(function () {
+                interval = setInterval(function () { right(); }, 50);
+            }).mouseup(function () {
+                clearInterval(interval);
+            });
+            $('.up').mousedown(function () {
+                interval = setInterval(function () { up(); }, 50);
+            }).mouseup(function () {
+                clearInterval(interval);
+            });
+            $('.down').mousedown(function () {
+                interval = setInterval(function () { down(); }, 50);
+            }).mouseup(function () {
+                clearInterval(interval);
+            });
+
+            function left() {
+                $('.player').animate({ left: x -= 10 }, 10, 'swing');
+            }
+            function right() {
+                $('.player').animate({ left: x += 10 }, 10, 'swing');
+            }
+            function up() {
+                $('.player').animate({ top: y -= 10 }, 10, 'swing');
+            }
+            function down() {
+                $('.player').animate({ top: y += 10 }, 10, 'swing');
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="control">
+        <div class="player"><img src="images/image.png"></div>
+        <div class="controls">
+            <p class="left">Left</p>
+            <p class="right">Right</p>
+            <p class="up">Up</p>
+            <p class="down">Down</p>
+            <p class="dunk">Dunk!!</p>
+        </div>
+    </div>
+
+    <div id="background"><img class="bg" src="images/background.jpg"></div>
+</body>
+
+</html>

@@ -1,0 +1,494 @@
+<?php
+    include_once('g5/common.php');
+    include_once(G5_LIB_PATH.'/latest.lib.php');
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계룡건설산업</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="https://yisang0527.dothome.co.kr/assets/favicon-100x100.png"
+        sizes="32x32" />
+
+    <style>
+        /* 초기 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* header css */
+        header {
+            width: 100%;
+            height: 100px;
+        }
+
+        header>div {
+            width: 80%;
+            height: 100%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 150px;
+            height: 100%;
+            line-height: 100px;
+        }
+
+        .logo a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 30px;
+            margin-right: 5px;
+        }
+
+        .logo p {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        header>div ul {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        header>div ul li {
+            width: 25%;
+            height: 100%;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        header>div ul li a {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        header>div ul li a:hover {
+            color: #5588ff;
+        }
+
+        /* container css */
+        #container {
+            width: 100%;
+        }
+
+        .section {
+            height: 550px;
+            position: relative;
+        }
+
+        .section1Text {
+            position: absolute;
+            top: 100px;
+            left: 11.4%;
+        }
+
+        .section1Text p,
+        .section1Text span {
+            color: white;
+        }
+
+        .section1Text p:nth-of-type(1) {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .section1Text span {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .section2,
+        .section3 {
+            margin: auto;
+        }
+
+        .section3 {
+            height: 750px;
+        }
+
+        .section2Text {
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section2Text p {
+            margin-bottom: 15px;
+        }
+
+        .section2Text p:nth-of-type(1) {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .section2Text p:nth-of-type(2) {
+            width: 50px;
+            height: 3px;
+            background: #5588ff;
+        }
+
+        .section2Text p:nth-of-type(3) {
+            font-weight: bold;
+        }
+
+        .section2Text p:nth-of-type(4),
+        .section2Text p:nth-of-type(5) {
+            margin-bottom: 0;
+        }
+
+        .section2Img {
+            width: 1200px;
+            height: 300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .section2Img div {
+            position: relative;
+            width: 210px;
+            height: 100%;
+            padding: 15px;
+            overflow: hidden;
+            box-shadow:
+                inset 0 50px 50px -15px rgba(0, 0, 0, 0.2),
+                inset 0 -50px 50px -15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section2Img div img {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            height: 100%;
+            z-index: -100;
+            transition: all .3s ease;
+        }
+
+        .section2Img div:hover img {
+            scale: 1.1;
+            cursor: pointer;
+        }
+
+        .section2Img div p {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .section2Img div p:nth-of-type(1) {
+            margin-bottom: 160px;
+        }
+
+        .section2Img div p:nth-of-type(2) {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .section3Text {
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section3Text p {
+            margin-bottom: 15px;
+        }
+
+        .section3Text p:nth-of-type(1) {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .section3Text p:nth-of-type(2) {
+            width: 50px;
+            height: 3px;
+            background: #5588ff;
+        }
+
+        .section3Text p:nth-of-type(3) {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        .contants1 {
+            width: 80%;
+            min-height: 100px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .contants2 {
+            width: 80%;
+            min-height: 100px;
+            margin: 50px auto 0;
+            padding: 10px;
+        }
+
+        .lat {
+            margin-left: 100px;
+        }
+
+        .basic_li {
+            margin-bottom: 10px;
+        }
+
+        .lat_title {
+            margin: 0 0 10px 50px;
+        }
+
+        .pic_lt ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery_li {
+            width: 200px;
+            margin: 10px;
+            font-size: 12px;
+        }
+
+        .gallery_li img {
+            width: 100%;
+            vertical-align: top;
+        }
+
+        /* section 구분선 */
+        #container>p {
+            width: 100%;
+            height: 1px;
+            background: #ccc;
+            margin: 50px 0 0;
+        }
+
+        /* footer css */
+        footer {
+            background: #222;
+            width: 100%;
+            height: 350px;
+        }
+
+        .footer1 {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footerSection {
+            height: 100%;
+            margin: 0 20px;
+            padding: 30px 0;
+        }
+
+        .footer1-1 h3,
+        .footer1-2 h3,
+        .footer1-1 p:nth-of-type(1) {
+            color: #ccc;
+        }
+
+        .footer1-1 span {
+            color: #5588ff;
+        }
+
+        .footer1-1 p,
+        .footer1-2 a,
+        .footer1-2 li {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .footer1-1 h3,
+        .footer1-2 h3 {
+            margin-bottom: 20px;
+        }
+
+        .footer2 {
+            background-color: #111;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer2 p {
+            color: #ccc;
+            font-size: 13px;
+        }
+
+        @media screen and (max-width: 1400px) {
+            .logo img {
+                width: 25px;
+            }
+
+            .logo p {
+                font-size: 20px;
+            }
+
+            .section2Img {
+                width: 1000px;
+            }
+
+            .section2Img div {
+                width: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <div class="logo">
+                <a href="https://yisang0527.dothome.co.kr/"><img src="https://yisang0527.dothome.co.kr/assets/logo.png"
+                        alt="계룡건설 로고">
+                    <p>계룡건설</p>
+                </a>
+            </div>
+
+            <ul>
+                <li><a href="https://yisang0527.dothome.co.kr/g5/bbs/board.php?bo_table=board">계룡소개</a></li>
+                <li><a href="https://yisang0527.dothome.co.kr/g5/bbs/board.php?bo_table=gallery">갤러리</a></li>
+                <li><a href="https://yisang0527.dothome.co.kr/g5/bbs/board.php?bo_table=news">공지사항</a></li>
+                <li><a href="https://yisang0527.dothome.co.kr/g5/bbs/board.php?bo_table=QnA">홍보센터</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="container">
+        <div class="section section1">
+            <img src="assets/slide1.png" alt="슬라이드 이미지">
+            <div class="section1Text">
+                <p>한국은행 통합별관</p>
+                <span>360 건설 토털솔루션의 도약</span>
+                <p>대한민국 중앙은행 건물에 대한 100년 만의 리노베이션 프로젝트.<br>프리곤 서비스 등 스마트 기술로 건설 부문의 새로운 혁신을 이어갑니다.</p>
+            </div>
+        </div>
+
+        <div class="section section2">
+            <div class="section2Text">
+                <p>우리가 꿈꾸는 미래를 건설합니다.</p>
+                <p></p>
+                <p>OUR BUSINESS</p>
+                <p>4차 상업혁명 시대에 필요한 선진기술 도입, 자체 기술 개발, 그리고 우수 인재를 보유하여 건축, 토목, 주택,</p>
+                <p>플랜트 등 지속적인 사업영역의 확장을 통해 초일류기업으로 도약하고자 합니다.</P>
+            </div>
+
+            <div class="section2Img">
+                <div>
+                    <img src="assets/section2-1.jpg" alt="section2 이미지">
+                    <p>대전 베이스볼드림파크</p>
+                    <p>건축</p>
+                    <p>새로운 역사와 문화를<br>창조합니다.</p>
+                </div>
+                <div>
+                    <img src="assets/section2-2.jpg" alt="section2 이미지">
+                    <p>한샘대교</p>
+                    <p>토목</p>
+                    <p>세상을 연결하며<br>변화를 이끕니다.</p>
+                </div>
+                <div>
+                    <img src="assets/section2-3.jpg" alt="section2 이미지">
+                    <p>대전 소각시설</p>
+                    <p>플랜트</p>
+                    <p>우수 기술력으로<br>가치를 창출합니다</p>
+                </div>
+                <div>
+                    <img src="assets/section2-4.jpg" alt="section2 이미지">
+                    <p>엘리프 옥정 시그니처</p>
+                    <p>주택</p>
+                    <p>새로운 삶의 방식을<br>만들어갑니다.</p>
+                </div>
+                <div>
+                    <img src="assets/section2-5.jpg" alt="section2 이미지">
+                    <p>서산 오토밸리</p>
+                    <p>산업단지</p>
+                    <p>산업 환경의 첨단화를<br>실현합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+
+        <div class="section section3">
+            <div class="section3Text">
+                <p>계룡 소개</p>
+                <p></p>
+                <p>ABOUT KYERYONG</p>
+            </div>
+
+            <div class="contants1">
+                <?=latest('pic_block','gallery',6,15); ?>
+            </div>
+
+            <div class="contants2">
+                <?=latest('basic','QnA',3,75); ?>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer1">
+            <div class="footerSection footer1-1">
+                <h3>CONTACT US</h3>
+                <p>계룡건설</p>
+                <p><span>Tel: </span>042-480-7114</p>
+                <p><span>Fax: </span>042-486-1615</p>
+                <p>대전광역시 서구 문정로 48번길. 48</p>
+            </div>
+            <div class="footerSection footer1-2">
+                <h3>QUICK MENU</h3>
+                <ul>
+                    <li><a href="#">인트라넷</a></li>
+                    <li><a href="#">e-PS</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">채용정보</a></li>
+                    <li><a href="#">오시는 길</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer2">
+            <p>© Copyright 2016. Kyeryong Construction Industrial Co., LTD. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

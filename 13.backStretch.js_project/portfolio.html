@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+        /* 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* background css */
+        body {
+            width: 100%;
+            height: 30000px;
+            font-size: 12px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        main {
+            position: relative;
+        }
+
+        /* Header css */
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            width: 100%;
+            height: 100px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 6.5%;
+            height: 100px;
+            margin-left: 60px;
+            float: left;
+        }
+
+        .logo a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .menu {
+            float: right;
+            width: 40%;
+            height: 100px;
+        }
+
+        .menu ul {
+            display: flex;
+        }
+
+        .menu ul li {
+            text-align: center;
+            width: 25%;
+            height: 100px;
+            line-height: 100px;
+        }
+
+        .menu ul li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: #ddd;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .menu ul li:hover a {
+            color: rgb(220, 0, 0);
+        }
+
+        /* side navigation css */
+        .navi {
+            background-color: rgba(30, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            border-radius: 25px;
+            width: 350PX;
+            height: 50%;
+            padding: 0 20px;
+            position: fixed;
+            top: 50%;
+            left: 2.2%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navi li {
+            width: 100%;
+            margin-bottom: 25px;
+            cursor: pointer;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .navi li:hover {
+            font-size: 16px;
+        }
+
+        .navi li.on {
+            color: #ddd;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* section css */
+        section {
+            /* border: 1px solid red; */
+            width: 100%;
+            height: 70%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            perspective: 2300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        section>article {
+            width: 1200px;
+            height: 100%;
+            position: absolute;
+            color: #ddd;
+            text-align: center;
+            left: 500px;
+        }
+
+        article.on {
+            z-index: 2;
+        }
+
+        article:nth-child(1) {
+            transform: translateZ(0);
+            z-index: 500;
+        }
+
+        article:nth-child(2) {
+            transform: translateZ(-5000px);
+            z-index: 400;
+        }
+
+        article:nth-child(3) {
+            transform: translateZ(-10000px);
+            z-index: 300;
+        }
+
+        article:nth-child(4) {
+            transform: translateZ(-15000px);
+            z-index: 200;
+        }
+
+        article:nth-child(5) {
+            transform: translateZ(-20000px);
+            z-index: 100;
+        }
+
+        section>article div {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            text-align: center;
+        }
+
+        section>article div span {
+            font-weight: bold;
+        }
+
+        section>article div p {
+            margin-bottom: 5px;
+        }
+
+        section>article div p:nth-of-type(1) {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        section>article:nth-of-type(2)>img {
+            width: 65%;
+        }
+
+        section>article:nth-of-type(3)>img {
+            width: 40%;
+        }
+
+        section>article:nth-of-type(4)>img {
+            width: 35%;
+        }
+
+        section>article:nth-of-type(5)>img {
+            transform: translateY(5%);
+            width: 65%;
+        }
+
+        section>article:nth-of-type(6)>img {
+            transform: translateY(8%);
+            width: 70%;
+        }
+
+        article>div>img:hover {
+            cursor: pointer;
+            scale: 1.1;
+        }
+
+        /* ui css */
+        #ui {
+            position: fixed;
+            top: 85%;
+            left: 3.25%;
+            border: 1px solid #333;
+            border-radius: 10px;
+            width: 75px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            line-height: 30px;
+        }
+
+        #ui:hover {
+            cursor: pointer;
+        }
+
+        #ui p {
+            font-weight: bold;
+        }
+
+        /* footer css */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+            padding: 0 50px 0 60px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            color: #ddd;
+        }
+
+        footer div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer>div>a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-left: 25px;
+        }
+
+        footer>div>a>img {
+            width: 30px;
+            height: 30px;
+        }
+
+        footer img:hover {
+            scale: 1.1
+        }
+
+        /* === 로딩 화면 CSS === */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            z-index: 2000;
+            transition: opacity 2s ease;
+        }
+
+        #loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #loading-text {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            width: 70%;
+            max-width: 400px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ffffff, #ff0000, #8b0000);
+            transition: width 0.05s;
+        }
+
+        @media screen and (max-width: 1400px) {
+            .menu {
+                width: 60%;
+            }
+
+        }
+
+        @media screen and (max-width: 1200px) {
+            section>article>div {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .menu ul li a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading">
+        <div id="loading-text">리허설 중...</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <div class="logo">
+                <a href="#"><img src="images/logo.png" alt="낙화 로고"></a>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">NEWS</a></li>
+                    <li><a href="#">LIVE</a></li>
+                    <li><a href="#">PRODUCT</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <ul class="navi">
+            <li>밴드 소개</li>
+            <li>김한웅 / GUITAR, HEAD</li>
+            <li>황동현 / GUITAR, SUBHEAD</li>
+            <li>이재영 / GUITAR</li>
+            <li>김동희 / BASE</li>
+            <li>김채현 / DRUM</li>
+        </ul>
+
+        <section>
+            <article class="on">
+                <img class="obj1" src="images/section.png" alt="단체 이미지">
+                <div>
+                    <p>저희는 유한한 시간속에서 무한의 가치를 추구하는 <br> 밴드 <span>낙화</span>입니다</p>
+                    <p>낙화는 대전에서 활동하고 있는 직장인 밴드로, <br> 학창시절 인연으로부터 태어나 현재까지 활동을 이어오고 있습니다</p>
+                    <p>낙화의 공연을 찾아와주시는 분들에게 <br> 낙화의 낙이 <span>ROCK</span>, 혹은 <span>樂</span>이 되길 바랍니다</p>
+                    <p>정기적으로 열리는 연합공연, 연말공연부터 <br> 낙화의 일상을 볼 수 있는 공식 유튜브와 인스타까지, <br> 많은 관심 부탁드립니다 </p>
+                </div>
+            </article>
+
+            <article>
+                <img class="obj2" src="images/section2.png" alt="김한웅 이미지">
+                <div>
+                    <p>김한웅 / GUITAR, HEAD</p>
+                    <img src="images/insta.png" alt="인스타 아이콘">
+                </div>
+            </article>
+
+            <article>
+                <img class="obj3" src="images/section3.png" alt="황동현 이미지">
+                <div>
+                    <p>황동현 / GUITAR, SUBHEAD</p>
+                    <img src="images/insta.png" alt="인스타 아이콘">
+                </div>
+            </article>
+
+            <article>
+                <img class="obj4" src="images/section4.png" alt="이재영 이미지">
+                <div>
+                    <p>이재영 / GUITAR</p>
+                    <img src="images/insta.png" alt="인스타 아이콘">
+                </div>
+            </article>
+
+            <article>
+                <img class="obj5" src="images/section5.png" alt="김동희 이미지">
+                <div>
+                    <p>김동희 / BASE</p>
+                    <img src="images/insta.png" alt="인스타 아이콘">
+                </div>
+            </article>
+
+            <article>
+                <img class="obj6" src="images/section6.png" alt="김채현 이미지">
+                <div>
+                    <p>김채현 / DRUM</p>
+                    <img src="images/insta.png" alt="인스타 아이콘">
+                </div>
+            </article>
+        </section>
+
+        <div id="ui">
+            <p>UI / OFF</p>
+        </div>
+
+        <footer>
+            <p>Copyright 2025. drop_flower All rights reserved.</p>
+            <div>
+                <a href="https://www.instagram.com/dropflower._official/?igsh=aXlhcXJjOTloMjk0&utm_source=qr#"
+                    target="_blank"><img src="images/insta.png" alt="인스타 아이콘"></a>
+                <a href="https://www.youtube.com/@dropflowerofficial" target="_blank"><img src="images/youtube.png"
+                        alt="유튜브 아이콘"></a>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="jquery.backstretch.min.js"></script>
+    <script>
+        $(function () {
+
+            $.backstretch(['images/background.jpg', 'images/background2.jpg'], { duration: 8000, fade: 1500 });
+
+            // 항상 스크롤를 최상단으로
+            $('html, body').animate({ scrollTop: 0 }, 'swing');
+
+            var sectionDepth = 5000;
+            var speed = 1000;
+
+            var $articles = $('section article');
+            var articleCount = $articles.length;
+
+            $(window).on('scroll', function () {
+                var scroll = $(this).scrollTop();
+
+                for (var i = 0; i < articleCount; i++) {
+                    $articles.eq(i).css({
+                        'transform': 'translateZ(' + (-sectionDepth * i + scroll) + 'px)'
+                    });
+
+                    if (scroll >= i * sectionDepth && scroll < (i + 1) * sectionDepth) {
+                        $('.navi li').removeClass('on');
+                        $('.navi li').eq(i).addClass('on');
+                        $articles.removeClass('on');
+                        $articles.eq(i).addClass('on');
+                    }
+                }
+            });
+
+            $('.navi li').on('click', function () {
+                var ab = $(this).index();
+                $('html,body').animate({ 'scrollTop': sectionDepth * ab }, speed, 'swing');
+            });
+
+            // 강제 스크롤 이벤트
+            $(window).trigger('scroll');
+
+            $('#ui').click(function () {
+                const p = $(this).find('p');
+                if (p.text() === "UI / OFF") {
+                    p.text("UI / ON");
+                    $('header').hide();
+                    $('.navi').hide();
+                    $('section').hide();
+                    $('footer').hide();
+                } else {
+                    p.text("UI / OFF");
+                    $('header').show();
+                    $('.navi').show();
+                    $('section').show();
+                    $('footer').show();
+                }
+            });
+        });
+
+        // 로딩 화면
+        const loading = document.getElementById("loading");
+        const progressBar = document.getElementById("progress-bar");
+
+        let progress = 0;
+        const duration = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+        const interval = 50;
+        const step = 100 / (duration / interval);
+
+        const timer = setInterval(() => {
+            progress += step;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(timer);
+
+                loading.classList.add("hidden");
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 2000);
+            }
+            progressBar.style.width = progress + "%";
+        }, interval);
+    </script>
+
+</body>
+
+</html>
