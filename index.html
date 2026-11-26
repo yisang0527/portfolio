@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-lang="pageTitle">이재영 | 프론트엔드 개발자 포트폴리오</title>
 
-    <!-- 검색 결과 · 링크 공유 미리보기 (카카오톡, 슬랙 등) -->
     <meta name="description" content="프론트엔드 개발자 이재영의 포트폴리오입니다. 기술 스택, 경력, 교육 이력과 프로젝트를 소개합니다.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="이재영 | 프론트엔드 개발자 포트폴리오">
     <meta property="og:description" content="프론트엔드 개발자 이재영의 포트폴리오입니다. 기술 스택, 경력, 교육 이력과 프로젝트를 소개합니다.">
-    <!-- TODO: 배포 후 전체 주소로 변경 (예: https://배포주소/images/projects/portfolio.webp) → 공유 미리보기는 전체 주소여야 이미지가 보임 -->
     <meta property="og:image" content="./images/projects/portfolio.webp">
 
-    <!-- 브라우저 탭 아이콘 -->
     <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="./css/base.css">
@@ -27,7 +24,6 @@
 
 <body>
     <header>
-        <!-- 언어 변경 -->
         <div class="lang-switch">
             <button value="ko" aria-pressed="true">KOR</button>
             <button value="en" aria-pressed="false">ENG</button>
@@ -35,31 +31,18 @@
     </header>
 
     <main>
-        <!--
-            쇼케이스 (페이지 전체)
-            - 캐릭터 무대(.character-stage)만 화면에 고정되어 스크롤 동안 360° 회전
-            - 좌우 콘텐츠는 스크롤하면 위로 올라감
-            - 마무리 문구까지 캐릭터가 계속 회전
-        -->
         <section class="showcase">
             <h1 class="sr-only" data-lang="welcomeTitle">나의 포트폴리오에 오신 것을 환영합니다</h1>
 
-            <!-- 캐릭터 무대 -->
             <div class="character-stage">
                 <canvas class="character-canvas" aria-hidden="true"></canvas>
 
-                <!-- 첫 화면: 캐릭터 주변을 도는 원형 문구 -->
                 <div class="welcome-ring" aria-hidden="true">
                     <svg viewBox="0 0 200 200">
                         <defs>
                             <path id="welcomeRingPath" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0" />
                         </defs>
                         <text>
-                            <!--
-                                ✦ 앞뒤 간격: SVG는 일반 공백을 하나로 합치고 맨 앞·뒤 공백은 지움
-                                → 줄바꿈 없이 한 줄로, &nbsp;(합쳐지지 않는 공백)를 ✦ 양쪽에 2개씩 똑같이 넣음
-                                (맨 끝 &nbsp;&nbsp;는 원이 한 바퀴 돌아 처음 WELCOME과 만나는 지점의 간격)
-                            -->
                             <textPath href="#welcomeRingPath" textLength="552">WELCOME TO MY
                                 PORTFOLIO&nbsp;&nbsp;✦&nbsp;&nbsp;WELCOME TO MY PORTFOLIO&nbsp;&nbsp;✦&nbsp;&nbsp;
                             </textPath>
@@ -67,14 +50,12 @@
                     </svg>
                 </div>
 
-                <!-- 첫 화면: 스크롤 안내 -->
                 <div class="scroll-hint" aria-hidden="true">
                     <strong>SCROLL!!</strong>
                     <span class="scroll-hint-arrow"></span>
                 </div>
             </div>
 
-            <!-- 왼쪽 콘텐츠: 소개 / 스킬 / 경력 / 교육 / 연락처 -->
             <div class="content-column content-left">
                 <article class="card">
                     <span class="card-label">01 · ABOUT</span>
@@ -88,7 +69,7 @@
                     <span class="card-label">03 · SKILLS</span>
                     <h2 data-lang="skillsTitle">스킬 &amp; 툴</h2>
                     <p data-lang="skillsDesc">웹 표준과 접근성을 기본으로, 반응형 UI부터 컴포넌트 설계까지 다룹니다.</p>
-                    <!-- 아이콘 종류는 css/icons.css의 .icon-이름 -->
+
                     <ul class="tag-list">
                         <li><span class="tag-icon icon-html" aria-hidden="true"></span>HTML</li>
                         <li><span class="tag-icon icon-css" aria-hidden="true"></span>CSS</li>
@@ -117,11 +98,7 @@
                 <article class="card">
                     <span class="card-label">06 · EDUCATION</span>
                     <h2 data-lang="educationTitle">교육</h2>
-                    <!--
-                        교육 1건 = <dl class="info-list"> 1개 (항목명 dt : 내용 dd)
-                        - 추가할 때는 아래 <dl> 블록을 복사해 이어 붙이면 됨 → 2건 이상이면 사이에 구분선 자동 표시
-                        - 번역 키는 education2Institution / education2Course / education2Desc 처럼 번호만 바꿔 main.js에 추가
-                    -->
+
                     <dl class="info-list">
                         <dt data-lang="labelPeriod">기간</dt>
                         <dd>2025.07 ~ 2025.12</dd>
@@ -180,7 +157,6 @@
                 </article>
             </div>
 
-            <!-- 오른쪽 콘텐츠: 프로젝트 -->
             <div class="content-column content-right">
                 <article class="card">
                     <span class="card-label">02 · PROJECT</span>
@@ -196,8 +172,9 @@
                     </ul>
 
                     <div class="card-links">
-                        <a href="https://github.com/아이디/저장소" target="_blank" rel="noopener">GitHub</a>
-                        <a href="https://배포주소" target="_blank" rel="noopener" data-lang="linkDemo">사이트 보기</a>
+                        <a href="https://github.com/yisang0527/portfolio.git" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://yisang0527.dothome.co.kr/" target="_blank" rel="noopener"
+                            data-lang="linkDemo">사이트 보기</a>
                     </div>
                 </article>
 
@@ -209,7 +186,6 @@
                 </article>
             </div>
 
-            <!-- 마무리 문구 (캐릭터 위쪽에 표시) -->
             <div class="closing">
                 <h2 data-lang="closingTitle">끝까지 봐주셔서 감사합니다</h2>
                 <p data-lang="closingDesc">궁금한 점이 있으시다면 언제든지 연락주세요.</p>
@@ -217,7 +193,6 @@
         </section>
     </main>
 
-    <!-- 맨 위로 버튼 -->
     <button class="top-button">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 19V5" />
@@ -226,7 +201,6 @@
         <span class="sr-only" data-lang="topButton">맨 위로</span>
     </button>
 
-    <!-- 스크롤 진행률 바 -->
     <div class="progress" aria-hidden="true">
         <div class="progress-bar"></div>
     </div>
