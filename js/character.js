@@ -16,31 +16,55 @@
     const showcase = canvas.closest('.showcase');
     const closing = showcase.querySelector('.closing');
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    const startFrame = Math.round(START_ANGLE / (360 / FRAME_COUNT));
+    const wrap = (i) => ((i % FRAME_COUNT) + FRAME_COUNT) % FRAME_COUNT;
     const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
+    const startFrame = wrap(Math.round(START_ANGLE / (360 / FRAME_COUNT)));
 
-    let current = -1; // 지금 그려야 할 프레임 번호
+    const frames = [];
+    const ready = []; // 불러오기 + 디코딩까지 끝난 프레임
+    let current = startFrame; // 그려야 할 프레임
+    let drawn = -1; // 실제로 그려져 있는 프레임
 
-    // 프레임 미리 불러오기 (아직 안 불러온 프레임은 불러오는 즉시 그림)
-    const frames = Array.from({ length: FRAME_COUNT }, (_, i) => {
+    /*
+     * 프레임 불러오기
+     * - 시작 프레임부터 스크롤 방향 순서대로 요청 → 첫 화면이 가장 먼저 뜨고, 다음 장면이 미리 준비됨
+     * - decode(): 그리기 전에 미리 디코딩 → 스크롤 중 끊김 방지
+     */
+    for (let step = 0; step < FRAME_COUNT; step++) {
+        const i = wrap(startFrame + step);
         const img = new Image();
-        img.onload = () => i === current && draw();
         img.src = framePath(i + 1);
-        return img;
-    });
-
-    function draw() {
-        const img = frames[current];
-        if (!img?.complete || !img.naturalWidth) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // 이미지·캔버스 모두 정사각형
+        img.decode().then(() => {
+            ready[i] = true;
+            draw();
+        }, () => {});
+        frames[i] = img;
     }
 
-    // 고해상도 화면 대응
+    // 그릴 프레임이 아직 준비 전이면 가장 가까운 준비된 프레임 사용 (빈 화면·깜빡임 방지)
+    function nearestReady(index) {
+        for (let d = 0; d <= FRAME_COUNT / 2; d++) {
+            if (ready[wrap(index - d)]) return wrap(index - d);
+            if (ready[wrap(index + d)]) return wrap(index + d);
+        }
+        return -1;
+    }
+
+    function draw() {
+        const index = nearestReady(current);
+        if (index < 0 || index === drawn) return;
+        drawn = index;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(frames[index], 0, 0, canvas.width, canvas.height); // 이미지·캔버스 모두 정사각형
+    }
+
+    // 고해상도 화면 대응 (크기가 실제로 바뀔 때만 → 모바일 주소창 변화로 캔버스가 지워지는 깜빡임 방지)
     function resize() {
         const dpr = Math.min(devicePixelRatio || 1, 2);
-        canvas.width = Math.round(canvas.clientWidth * dpr);
-        canvas.height = Math.round(canvas.clientHeight * dpr);
+        const size = Math.round(canvas.clientWidth * dpr);
+        if (size === canvas.width) return;
+        canvas.width = canvas.height = size;
+        drawn = -1;
         draw();
     }
 
@@ -48,12 +72,8 @@
         // 회전: 섹션 스크롤 진행률(0~1) → 프레임 번호 (끝에서 다시 시작 각도로)
         const distance = showcase.offsetHeight - innerHeight;
         const progress = reduceMotion.matches || distance <= 0 ? 0 : clamp01(-showcase.getBoundingClientRect().top / distance);
-        const index = (((Math.round(progress * FRAME_COUNT) + startFrame) % FRAME_COUNT) + FRAME_COUNT) % FRAME_COUNT;
-
-        if (index !== current) {
-            current = index;
-            draw();
-        }
+        current = wrap(Math.round(progress * FRAME_COUNT) + startFrame);
+        draw();
 
         // 마지막 화면: 마무리 문구가 올라온 정도(0~1)
         showcase.style.setProperty('--closing-progress', clamp01(1 - closing.getBoundingClientRect().top / innerHeight).toFixed(3));

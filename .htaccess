@@ -1,0 +1,10 @@
+# 브라우저 캐시 설정 (Apache)
+# - 이미지·CSS·JS를 브라우저에 저장해 두고 다시 방문할 때 서버에 요청하지 않음
+# - 파일을 수정해 다시 올렸는데 예전 파일이 보이면 강력 새로고침(Ctrl + Shift + R)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
