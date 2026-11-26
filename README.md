@@ -5,11 +5,11 @@ HTML, CSS, JavaScript만으로 직접 디자인하고 개발했습니다.
 
 **🔗 사이트 보기: https://yisang0527.dothome.co.kr/**
 
-![포트폴리오 웹사이트 첫 화면](./images/projects/portfolio.webp)
+![포트폴리오 웹사이트 첫 화면: 원형 환영 문구에 둘러싸인 우주비행사 캐릭터](./images/projects/portfolio.webp)
 
 ## 주요 기능
 
-- **스크롤 회전 캐릭터**: 스크롤 진행률에 맞춰 캐릭터 프레임 이미지를 `<canvas>`에 그려 360° 회전 (캐릭터 이미지가 없으면 임시 캐릭터를 직접 그림)
+- **스크롤 회전 캐릭터**: 3D 우주비행사 모델을 72장(5° 간격)으로 렌더링하고, 스크롤 진행률에 맞춰 `<canvas>`에 그려 360° 회전
 - **고정 캐릭터 + 흐르는 콘텐츠**: 캐릭터만 `position: sticky`로 화면 가운데에 고정하고, 좌우 콘텐츠 카드는 자연스럽게 위로 스크롤
 - **첫 화면 연출**: 캐릭터 주위를 도는 원형 `WELCOME TO MY PORTFOLIO` 문구(SVG `textPath`)와 스크롤 안내
 - **한국어 / 영어 전환**: `data-lang` 속성과 번역 사전으로 문구 전체를 전환하고, 선택한 언어를 `localStorage`에 저장
@@ -40,7 +40,7 @@ portfolio/
 │   ├── main.js         # 진행률 바, 첫 화면 요소, 맨 위로 버튼, 언어 전환
 │   └── character.js    # 스크롤에 따른 캐릭터 360° 회전
 └── images/
-    ├── character/      # 캐릭터 프레임 이미지 (frame_001.webp ~ frame_036.webp)
+    ├── character/      # 캐릭터 프레임 이미지 (frame_001.webp ~ frame_072.webp)
     ├── icons/          # 기술 스택 아이콘 원본 SVG
     └── projects/       # 프로젝트 캡처 이미지
 ```

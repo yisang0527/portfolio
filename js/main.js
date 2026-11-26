@@ -7,25 +7,23 @@
 /* 1. 스크롤 ------------------------------------------------ */
 const progressBar = document.querySelector('.progress-bar');
 const topButton = document.querySelector('.top-button');
-// 스크롤을 시작하면 사라지는 첫 화면 요소
-const introElements = document.querySelectorAll('.welcome-ring, .scroll-hint');
+const introElements = document.querySelectorAll('.welcome-ring, .scroll-hint'); // 스크롤하면 사라지는 첫 화면 요소
 
 function updateScroll() {
+    const y = window.scrollY;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const percent = maxScroll > 0 ? Math.min(window.scrollY / maxScroll * 100, 100) : 0;
 
-    progressBar.style.width = `${percent}%`;
-    introElements.forEach((el) => el.classList.toggle('is-hidden', window.scrollY > 20));
-    // 첫 화면을 지나면 맨 위로 버튼 표시
-    topButton.classList.toggle('is-visible', window.scrollY > window.innerHeight);
+    progressBar.style.width = `${maxScroll > 0 ? Math.min(y / maxScroll, 1) * 100 : 0}%`;
+    introElements.forEach((el) => el.classList.toggle('is-hidden', y > 20));
+    topButton.classList.toggle('is-visible', y > window.innerHeight); // 첫 화면을 지나면 표시
 }
 
-window.addEventListener('scroll', updateScroll, { passive: true });
-window.addEventListener('resize', updateScroll);
+addEventListener('scroll', updateScroll, { passive: true });
+addEventListener('resize', updateScroll);
 updateScroll();
 
-// 맨 위로 이동 (부드러운 스크롤은 CSS scroll-behavior가 담당)
-topButton.addEventListener('click', () => window.scrollTo({ top: 0 }));
+// 맨 위로 (부드러운 스크롤은 CSS scroll-behavior가 담당)
+topButton.addEventListener('click', () => scrollTo({ top: 0 }));
 
 /* 2. 언어 변경 --------------------------------------------- */
 // 키 이름 = HTML의 data-lang 값
@@ -53,7 +51,7 @@ const translations = {
 
         // 오른쪽: 프로젝트
         project1Title: '포트폴리오 웹사이트',
-        project1ImageAlt: '포트폴리오 웹사이트 첫 화면: 원형 환영 문구에 둘러싸인 캐릭터',
+        project1ImageAlt: '포트폴리오 웹사이트 첫 화면: 원형 환영 문구에 둘러싸인 우주비행사 캐릭터',
         project1Desc: 'HTML, CSS, JavaScript로 직접 디자인하고 개발했습니다. 스크롤에 따라 360° 회전하는 캐릭터를 중심으로, 저의 기술 스택과 경력, 교육 이력 등 개발자로서의 스펙을 한눈에 볼 수 있도록 구성했습니다.',
         project2Title: '제작중',
         project2Desc: '다음 프로젝트를 제작중입니다.',
@@ -94,7 +92,7 @@ const translations = {
 
         // 오른쪽: 프로젝트
         project1Title: 'Portfolio Website',
-        project1ImageAlt: 'Portfolio website first screen: a character surrounded by a circular welcome message',
+        project1ImageAlt: 'Portfolio website first screen: an astronaut character surrounded by a circular welcome message',
         project1Desc: 'Designed and built with HTML, CSS and JavaScript. Centered on a character that rotates 360° as you scroll, the site brings together my tech stack, experience and education so you can see my background as a developer at a glance.',
         project2Title: 'In progress',
         project2Desc: 'My next project is currently in progress.',
@@ -118,23 +116,17 @@ const langButtons = document.querySelectorAll('.lang-switch button');
 
 function changeLanguage(lang) {
     if (!translations[lang]) lang = 'ko';
+    const text = translations[lang];
 
-    document.querySelectorAll('[data-lang]').forEach((el) => {
-        el.textContent = translations[lang][el.dataset.lang] ?? el.textContent;
-    });
-
-    // 이미지 대체 텍스트(alt)
-    document.querySelectorAll('[data-lang-alt]').forEach((el) => {
-        el.alt = translations[lang][el.dataset.langAlt] ?? el.alt;
-    });
+    // 글자(data-lang) / 이미지 대체 텍스트(data-lang-alt)
+    document.querySelectorAll('[data-lang]').forEach((el) => (el.textContent = text[el.dataset.lang] ?? el.textContent));
+    document.querySelectorAll('[data-lang-alt]').forEach((el) => (el.alt = text[el.dataset.langAlt] ?? el.alt));
 
     langButtons.forEach((btn) => btn.setAttribute('aria-pressed', btn.value === lang));
     document.documentElement.lang = lang;
     localStorage.setItem('selectedLang', lang);
 }
 
-langButtons.forEach((btn) => {
-    btn.addEventListener('click', () => changeLanguage(btn.value));
-});
+langButtons.forEach((btn) => btn.addEventListener('click', () => changeLanguage(btn.value)));
 
 changeLanguage(localStorage.getItem('selectedLang') || (navigator.language.startsWith('ko') ? 'ko' : 'en'));
