@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
     <!-- 브라우저 탭 아이콘: 차콜 배경 + 캐릭터 얼굴 -->
-    <rect width="32" height="32" rx="8" fill="#1C1D20" />
-    <circle cx="16" cy="16" r="10" fill="#26282C" stroke="#8DA7BD" stroke-width="2" />
+    <rect width="32" height="32" rx="8" fill="#15181E" />
+    <circle cx="16" cy="16" r="10" fill="#1E222A" stroke="#8DA7BD" stroke-width="2" />
     <ellipse cx="12.5" cy="14.5" rx="1.4" ry="2" fill="#F7F8FA" />
     <ellipse cx="19.5" cy="14.5" rx="1.4" ry="2" fill="#F7F8FA" />
     <path d="M12.5 19.5q3.5 2.6 7 0" fill="none" stroke="#F7F8FA" stroke-width="1.6" stroke-linecap="round" />

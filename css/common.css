@@ -12,8 +12,35 @@ html {
     scroll-behavior: smooth;
 }
 
+/*
+ * 배경: 우주 검정 + 은은한 별
+ * - 작은 점(radial-gradient)을 크기가 다른 두 타일로 반복 → 규칙적인 패턴이 덜 보임
+ * - fixed: 스크롤해도 별은 제자리 (콘텐츠만 지나감)
+ */
 body {
-    background: var(--color-bg);
+    background-color: var(--color-bg);
+    background-image:
+        /* 타일 A (340 x 260) */
+        radial-gradient(1px 1px at 24px 36px, var(--color-star), transparent),
+        radial-gradient(1px 1px at 156px 112px, var(--color-star), transparent),
+        radial-gradient(1.5px 1.5px at 268px 210px, var(--color-star), transparent),
+        radial-gradient(1px 1px at 300px 20px, var(--color-star), transparent),
+        radial-gradient(1px 1px at 70px 180px, var(--color-star), transparent),
+        /* 타일 B (610 x 470) */
+        radial-gradient(1px 1px at 92px 390px, var(--color-star), transparent),
+        radial-gradient(1.5px 1.5px at 410px 64px, var(--color-star), transparent),
+        radial-gradient(1px 1px at 520px 300px, var(--color-star), transparent),
+        radial-gradient(1.5px 1.5px at 230px 250px, var(--color-star), transparent),
+        radial-gradient(1px 1px at 580px 440px, var(--color-star), transparent),
+        /* 타일 C (890 x 720) */
+        radial-gradient(1px 1px at 140px 560px, var(--color-star), transparent),
+        radial-gradient(1.5px 1.5px at 760px 150px, var(--color-star), transparent),
+        radial-gradient(1px 1px at 470px 640px, var(--color-star), transparent);
+    background-size:
+        340px 260px, 340px 260px, 340px 260px, 340px 260px, 340px 260px,
+        610px 470px, 610px 470px, 610px 470px, 610px 470px, 610px 470px,
+        890px 720px, 890px 720px, 890px 720px;
+    background-attachment: fixed;
     color: var(--color-text);
 }
 
@@ -117,6 +144,21 @@ header {
         align-items: center;
         height: 100vh;
         height: 100dvh;
+
+        /* 캐릭터 뒤 은은한 빛: 흰 우주복이 배경에서 떠 보이도록 (z-index -1 → 캐릭터 뒤) */
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            translate: -50% -50%;
+            width: calc(var(--character-size) * 1.2);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--color-glow), transparent 70%);
+            pointer-events: none;
+        }
     }
 
     .character-canvas {
@@ -124,6 +166,8 @@ header {
         aspect-ratio: 1;
         /* --closing-progress(0 → 1)는 character.js가 마무리 문구가 올라오는 만큼 갱신 */
         translate: 0 calc(var(--closing-progress, 0) * var(--closing-offset));
+        /* 무중력 상태처럼 위아래로 둥둥 (translate와 별도로 transform을 써서 서로 겹치지 않음) */
+        animation: characterFloat 5s ease-in-out infinite;
     }
 
     /* 첫 화면: 캐릭터 주변을 천천히 도는 원형 문구 */
@@ -153,6 +197,11 @@ header {
             font-size: 10px;
             font-weight: bold;
             fill: var(--color-text);
+        }
+
+        /* ✦: 우주복 줄무늬 빨강 포인트 */
+        .ring-star {
+            fill: var(--color-point);
         }
 
         &.is-hidden {
@@ -653,6 +702,19 @@ header {
 
     50% {
         transform: translate(-50%, 8px);
+    }
+}
+
+/* 캐릭터: 위아래로 떠다니며 살짝 기울어짐 */
+@keyframes characterFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-1deg);
+    }
+
+    50% {
+        transform: translateY(-14px) rotate(1deg);
     }
 }
 

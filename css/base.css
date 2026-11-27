@@ -95,37 +95,42 @@ h6 {
 
 :root {
     /*
-     * Charcoal Black palette
-     * - 배경: 살짝 쿨톤(블루 그레이)이 섞인 차콜 → 스틸 블루 포인트 컬러와 톤 통일
-     * - 대비(WCAG, --color-bg 기준): text 13.9:1 / muted 6.6:1 / accent 6.7:1
+     * Space Charcoal palette (우주비행사 캐릭터 콘셉트)
+     * - 배경: 푸른빛이 도는 우주 검정 → 우주복의 푸른 회색, 스틸 블루 포인트와 톤 통일
+     * - 포인트 빨강: 우주복 줄무늬 색, 아주 작은 강조에만 사용
+     * - 대비(WCAG, --color-bg 기준): text 14.9:1 / muted 7.0:1 / accent 7.1:1 / point 5.1:1
+     *   (카드 --color-surface 기준: text 13.3:1 / muted 6.3:1 / point 4.6:1)
      */
 
     /* Brand */
-    --color-primary: #1C1D20;
-    --color-secondary: #2F3136;
+    --color-primary: #15181E;
+    --color-secondary: #2A2F38;
     --color-accent: #8DA7BD;
+    --color-point: #E0605A;
 
     /* Background (어두운 순: dark < bg < surface) */
-    --color-bg-dark: #141517;
-    --color-bg: #1C1D20;
-    --color-surface: #26282C;
+    --color-bg-dark: #0F1115;
+    --color-bg: #15181E;
+    --color-surface: #1E222A;
 
     /* Text */
-    --color-text: #E8E9EC;
+    --color-text: #E8EBF0;
     --color-text-light: #F7F8FA;
-    --color-text-muted: #9DA2AA;
+    --color-text-muted: #9DA3AE;
 
     /* Border */
-    --color-border: #3A3D43;
-    --color-border-dark: #2C2E33;
+    --color-border: #333A46;
+    --color-border-dark: #262B34;
 
     /* Interaction */
     --color-hover: #AFC3D4;
     --color-active: #7089A0;
 
     /* UI */
-    --color-header-overlay: rgba(28, 29, 32, 0.92);
-    --color-progress-track: #33363B;
+    --color-header-overlay: rgba(21, 24, 30, 0.92);
+    --color-progress-track: #2B313B;
+    --color-glow: rgba(141, 167, 189, 0.26); /* 캐릭터 뒤 은은한 빛 (accent 기반) */
+    --color-star: rgba(232, 235, 240, 0.75); /* 배경 별 */
 
     /* Utility */
     --color-white: #FFFFFF;
